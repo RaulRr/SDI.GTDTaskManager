@@ -18,13 +18,14 @@ public class ValidarseAction implements Accion {
 		
 		String resultado="EXITO";
 		String nombreUsuario=request.getParameter("nombreUsuario");
+		String passUsuario=request.getParameter("passUsuario");
 		HttpSession session=request.getSession();
 		if (session.getAttribute("user")==null) {
 			UserService userService = Services.getUserService();
 			User userByLogin=null;
 			try {
 				userByLogin = userService.findLoggableUser(nombreUsuario, 
-						nombreUsuario+"123");
+						passUsuario);
 			} catch (BusinessException b) {
 				session.invalidate();
 				Log.debug("Algo ha ocurrido intentando iniciar sesión [%s]: %s", 

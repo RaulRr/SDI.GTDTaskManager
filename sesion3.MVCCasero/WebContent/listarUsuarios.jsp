@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="table-responsive">
 			<h3 align="center">Usuarios</h3>
-			<table class="table table-striped table-condensed table-bordered"
+			<table class="table table-striped table-condensed table-bordered table-hover"
 				align="center">
 				<tr class="row">
 					<th class="col-*-*">ID</th>

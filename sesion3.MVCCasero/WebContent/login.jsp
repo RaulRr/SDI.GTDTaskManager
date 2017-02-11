@@ -15,20 +15,36 @@
 			</center>
 			<hr>
 			<br>
-			<table align="center">
+			<table align="center" class="table table-condensed" style="width: 50%">
 				<tr>
-					<td align="right">Su identificador de usuario</td>
-					<td><input type="text" name="nombreUsuario" align="left"
+					<td align="left">Su identificador de usuario:</td>
+					<td colspan="3"><input type="text" name="nombreUsuario" align="left"
 						size="15"></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Enviar" /></td>
+					<td align="left">Su contraseña:</td>
+					<td colspan="3"><input type="password" name="passUsuario" align="left"
+						size="15"></td>
+				</tr>
+				<tr>
+					<td/>
+					<td><input type="submit" value="Enviar" />
+					<a id="registrar_link_id" href="accesoRegistroUsuario">Registrarse</a>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<div class="alert alert-info">
+							<center>
+								<a id="listarCategorias_link_id" href="listarCategorias">Lista
+									de categorias</a>
+							</center>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</form>
 		<center>
-			<a id="listarCategorias_link_id" href="listarCategorias">Lista de
-				categorias</a>
 			<%@ include file="pieDePagina.jsp"%>
 		</center>
 	</div>
