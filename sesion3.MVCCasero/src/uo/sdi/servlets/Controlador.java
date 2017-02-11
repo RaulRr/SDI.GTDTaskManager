@@ -169,11 +169,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP=new HashMap<String, String>();
 		
 		// Mapa de navegación del administrador
-		resultadoYJSP.put("EXITO","/listarUsuarios.jsp");
+		resultadoYJSP.put("EXITO","/principalUsuario.jsp");
 		opcionResultadoYJSP.put("validarse", resultadoYJSP);
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/listarUsuarios.jsp");
-		resultadoYJSP.put("FRACASO","/login.jsp");
+		resultadoYJSP.put("FRACASO","/principalUsuario.jsp");
 		opcionResultadoYJSP.put("listarUsuarios", resultadoYJSP);
 		mapaDeNavegacion.put("ADMIN",opcionResultadoYJSP);
 		

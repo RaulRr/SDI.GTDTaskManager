@@ -35,7 +35,11 @@
 			<td>Estado:</td><td id="status"><jsp:getProperty property="status" name="user" /></td>
 		</tr>
 	</table>
-	<br/>	
+	<br/>
+	<c:if test="${user.getIsAdmin()==true}">
+		<a id="listarUsuarios_link_id" href="listarUsuarios">Listar Usuarios</a>
+	</c:if>	
+	<br/>
 	<a id="cerrarSesion_link_id" href="cerrarSesion">Cerrar sesión</a>
 	
 	<%@ include file="pieDePagina.jsp" %>
