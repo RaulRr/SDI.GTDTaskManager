@@ -1,6 +1,10 @@
 # SDI.GTDTaskManager
 
+Aplicación de gestión de tareas.
 
+Permite el registro de usuarios, listado de tareas, y organización de las mismas en categorías, así como marcarlas como finalizadas.
+
+El administrador puede inhabilitar usuarios.
 
 
 ##Modelo de domínio:
