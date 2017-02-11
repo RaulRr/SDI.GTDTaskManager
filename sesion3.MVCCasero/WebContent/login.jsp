@@ -1,6 +1,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head> <title>TaskManager - Inicie sesión</title>
+<html>
+<head> 
+	<title>TaskManager - Inicie sesión</title>
+	<link href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
+</head>
 <body>
   <form action="validarse" method="post" name="validarse_form_name">
 
