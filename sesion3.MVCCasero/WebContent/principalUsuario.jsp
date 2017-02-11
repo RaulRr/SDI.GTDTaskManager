@@ -38,8 +38,8 @@
 	<br/>
 	<c:if test="${user.getIsAdmin()==true}">
 		<a id="listarUsuarios_link_id" href="listarUsuarios">Listar Usuarios</a>
-	</c:if>
-	<br/>	
+	</c:if>	
+	<br/>
 	<a id="cerrarSesion_link_id" href="cerrarSesion">Cerrar sesión</a>
 	
 	<%@ include file="pieDePagina.jsp" %>
