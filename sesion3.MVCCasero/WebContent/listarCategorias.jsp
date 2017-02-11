@@ -11,7 +11,8 @@
 </head>
 <body>
 	<div class="container">
-		<h3 align="center">Categorías</h3>
+		<div class="table-responsive">
+			<h3 align="center">Categorías</h3>
 			<table class="table table-striped table-condensed table-bordered"
 				align="center">
 				<thead>
@@ -30,8 +31,11 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		<a id="paginaAnterior_link_id" href="login.jsp">Volver atrás</a>
-		<%@ include file="pieDePagina.jsp"%>
+		</div>
+		<center>
+			<a id="paginaAnterior_link_id" href="login.jsp">Volver atrás</a>
+			<%@ include file="pieDePagina.jsp"%>
+		</center>
 	</div>
 </body>
 </html>

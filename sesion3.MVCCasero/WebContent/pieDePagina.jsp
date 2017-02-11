@@ -1,3 +1,4 @@
-	<br/>
-	<br/>
-	${requestScope.mensajeParaElUsuario!=null ? '<i>' += requestScope.mensajeParaElUsuario += '</i>' : ''}
+
+<br />
+<br />
+${requestScope.mensajeParaElUsuario!=null ? '<div class="alert alert-danger alert-dismissable">' += requestScope.mensajeParaElUsuario += '  </div>' : ''}
