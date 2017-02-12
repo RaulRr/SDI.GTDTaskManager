@@ -17,16 +17,22 @@
 				align="center">
 				<tr class="row">
 					<th class="col-*-*">ID</th>
-					<th class="col-*-*">Login</th>
-					<th class="col-*-*">Email</th>
-					<th class="col-*-*">Status</th>
+					<th class="col-*-*"><a href="ordenarUsuarios?id=login">LOGIN</a></th>
+					<th class="col-*-*"><a href="ordenarUsuarios?id=email">EMAIL</a></th>
+					<th class="col-*-*"><a href="ordenarUsuarios?id=status">STATUS</a></th>
 				</tr>
 				<c:forEach var="entry" items="${listaUsuarios}" varStatus="i">
 					<tr class="row" id="item_${i.index}">
-						<td class="col-*-*"><a href="mostrarCategoria?id=${entry.id}">${entry.id}</a></td>
+						<td class="col-*-*">${entry.id}</td>
 						<td class="col-*-*">${entry.login}</td>
 						<td class="col-*-*">${entry.email}</td>
-						<td class="col-*-*">${entry.status}</td>
+						
+						<c:if test="${entry.isAdmin==true}">
+							<td>${entry.status}</td>
+						</c:if>
+						<c:if test="${entry.isAdmin==false}">
+							<td class="col*-*"><a href="modificarStatus?id=${entry.id}">${entry.status}</a></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</table>
