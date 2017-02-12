@@ -24,7 +24,7 @@ public class ListarUsuariosAction implements Accion {
 		try {
 			AdminService adminService = Services.getAdminService();
 			listaUsuarios=adminService.findAllUsers();
-			request.setAttribute("listaUsuarios", listaUsuarios);
+			request.getSession().setAttribute("listaUsuarios", listaUsuarios);
 			
 			Log.debug("Obtenida lista de usuarios conteniendo [%d] usuarios", 
 					listaUsuarios.size());

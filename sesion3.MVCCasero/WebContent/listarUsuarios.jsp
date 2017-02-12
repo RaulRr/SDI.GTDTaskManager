@@ -29,9 +29,12 @@
 						
 						<c:if test="${entry.isAdmin==true}">
 							<td>${entry.status}</td>
+							<td class="col*-*"></td>
 						</c:if>
 						<c:if test="${entry.isAdmin==false}">
-							<td class="col*-*"><a href="modificarStatus?id=${entry.id}">${entry.status}</a></td>
+							<td class="col*-*"><a href="modificarStatus?id=${entry.id}=${i.index}">${entry.status}</a></td>
+							<td class="col*-*"><a href="eliminarUsuario?id=${entry.id}=${i.index}" 
+								onClick="return confirm('¿Eliminar al usuario: ${entry.id}?');">Delete</a></td>
 						</c:if>
 					</tr>
 				</c:forEach>
