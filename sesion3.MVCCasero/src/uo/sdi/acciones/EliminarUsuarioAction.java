@@ -22,19 +22,19 @@ public class EliminarUsuarioAction implements Accion {
 		String resultado="EXITO";
 		
 		Long userId =  Long.parseLong(request.getQueryString().split("&")[0].split("=")[1]);
-		int index = Integer.parseInt(request.getQueryString().split("&")[0].split("=")[2]);
+		String login = request.getQueryString().split("&")[0].split("=")[2];
+		List<User> listaUsuarios;
 		
 		try {
 			AdminService adminService = new AdminServiceImpl();
-			//adminService.deepDeleteUser(userId);
-			adminService.findUserById(userId);
+			adminService.deepDeleteUser(userId);
+			Log.debug("Se ha eleminado con exito al usuario: [%s] - [%s]", 
+					userId, login);
 			
-			@SuppressWarnings("unchecked")
-			List<User> listaUsuarios = (List<User>)request.getSession().getAttribute("listaUsuarios");
-			listaUsuarios.remove(index);	
+			listaUsuarios=adminService.findAllUsers();
+			request.setAttribute("listaUsuarios", listaUsuarios);
 			
-			Log.debug("Se ha eleminado con exito al usuario de id: [%s]", 
-					userId);
+			
 		}
 		catch (BusinessException b) {
 			Log.debug("Algo ha ocurrido eliminado al usuario de id [%s]", 

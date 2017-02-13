@@ -30,7 +30,7 @@ public class OrdenarUsuariosAction implements Accion {
 			//Para ordenar buscamos de nuevo todos los usuarios
 			listaUsuarios=adminService.findAllUsers();
 			ordenarUsuarios(listaUsuarios, comparador);
-			request.getSession().setAttribute("listaUsuarios", listaUsuarios);
+			request.setAttribute("listaUsuarios", listaUsuarios);
 			
 			Log.debug("Obtenida y ordenada lista de usuarios siguiendo [%s]", 
 					comparador);
