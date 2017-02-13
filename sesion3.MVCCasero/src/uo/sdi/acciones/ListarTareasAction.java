@@ -26,7 +26,7 @@ public class ListarTareasAction implements Accion {
 		try {
 			usuario=(User) session.getAttribute("user");
 			
-			listaTareas = Services.getTaskService().findTasksByCategoryId(usuario.getId());
+			listaTareas = Services.getTaskService().findInboxTasksByUserId(usuario.getId());
 			request.getSession().setAttribute("listaTareas", listaTareas);
 			
 			Log.debug("Obtenida lista de tareas conteniendo [%d] tareas", 
