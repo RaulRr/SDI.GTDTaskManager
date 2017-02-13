@@ -54,6 +54,12 @@
 					Usuarios</a>
 			</div>
 		</c:if>
+		<c:if test="${user.getIsAdmin()!=true}">
+			<div class="alert alert-info">
+				<a id="listarTareas_link_id" href="listarTareas">Listar
+					Tareas</a>
+			</div>
+		</c:if>
 		<br />
 		<center>
 			<a id="cerrarSesion_link_id" href="cerrarSesion">Cerrar sesión</a>
