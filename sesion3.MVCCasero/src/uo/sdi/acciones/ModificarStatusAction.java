@@ -24,8 +24,9 @@ public class ModificarStatusAction implements Accion {
 		String resultado="EXITO";
 		
 		Long userId =  Long.parseLong(request.getQueryString().split("&")[0].split("=")[1]);
-		int index = Integer.parseInt(request.getQueryString().split("&")[0].split("=")[2]);
+		String login = request.getQueryString().split("&")[0].split("=")[2];
 		UserStatus estado;
+		List<User> listaUsuarios;
 		
 		try {
 			AdminService adminService = new AdminServiceImpl();
@@ -37,12 +38,13 @@ public class ModificarStatusAction implements Accion {
 				adminService.enableUser(userId);
 				estado=UserStatus.ENABLED;
 			}
-			@SuppressWarnings("unchecked")
-			List<User> lista = (List<User>) request.getSession().getAttribute("listaUsuarios");
-			lista.get(index).setStatus(estado);
 			
-			Log.debug("Modificado status del usuario [%s] al valor [%s]", 
-					userId, estado);
+			Log.debug("Modificado status del usuario [%s] - [%s] al valor [%s]", 
+					userId, login, estado);
+		
+			listaUsuarios=adminService.findAllUsers();
+			request.setAttribute("listaUsuarios", listaUsuarios);
+						
 		}
 		catch (BusinessException b) {
 			Log.debug("Algo ha ocurrido actualizando el status del usuario [%s]", 
