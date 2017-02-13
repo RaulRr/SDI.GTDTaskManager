@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import uo.sdi.business.AdminService;
 import uo.sdi.business.Services;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Task;
@@ -25,8 +24,7 @@ public class ListarTareasAction implements Accion {
 		List<Task> listaTareas;
 		
 		try {
-			AdminService adminService = Services.getAdminService();
-			usuario=adminService.findUserById(Long.parseLong((String) session.getAttribute("user")));
+			usuario=(User) session.getAttribute("user");
 			
 			listaTareas = Services.getTaskService().findTasksByCategoryId(usuario.getId());
 			request.getSession().setAttribute("listaTareas", listaTareas);
