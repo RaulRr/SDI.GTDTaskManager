@@ -10,6 +10,23 @@
 	rel="stylesheet">
 </head>
 <body>
+	<div>
+		<form action="añadirTarea" method="POST">
+		<table class="table table-striped table-condensed" style="width: 50%"
+				align="center">
+				<tr>
+					<th>Nueva Tarea:</th>
+					<td id="nuevaTarea"><input type="text" name="nuevaTarea" value=""></td>
+				</tr>
+				<tr>
+					<td/>
+					<td><input type="submit" value="NuevaTarea"></td>
+				</tr>				
+			</table>
+			
+			
+		</form>
+	</div>
 	<div class="container">
 		<h3 align="center">Tareas:</h3>
 		<div class="row">
