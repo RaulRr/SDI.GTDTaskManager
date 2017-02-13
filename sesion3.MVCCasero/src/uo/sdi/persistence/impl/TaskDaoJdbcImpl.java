@@ -116,6 +116,15 @@ public class TaskDaoJdbcImpl implements TaskDao {
 				userId
 			);
 	}
+	
+	@Override
+	public List<Task> findAllTasksByUserId(Long userId) {
+		return jdbcTemplate.queryForList(
+				"TASK_FIND_ALL_BY_USER_ID", 
+				new TaskDtoMapper(),
+				userId
+			);
+	}
 
 	@Override
 	public List<Task> findTodayTasksByUserId(Long userId) {
