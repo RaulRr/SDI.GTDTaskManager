@@ -28,11 +28,16 @@
 						<td class="col-*-*">${entry.email}</td>
 						
 						<c:if test="${entry.isAdmin==true}">
-							<td>${entry.status}</td>
+							<td class="alert alert-info"><strong>${entry.status}</strong></td>
 							<td class="col*-*"></td>
 						</c:if>
 						<c:if test="${entry.isAdmin==false}">
-							<td class="col*-*"><a href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
+							<c:if test="${entry.status == 'ENABLED'}">
+								<td class="alert alert-success"><a href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
+							</c:if>
+							<c:if test="${entry.status != 'ENABLED'}">
+								<td class="alert alert-danger"><a href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
+							</c:if>
 							<td class="col*-*"><a href="eliminarUsuario?id=${entry.id}=${entry.login}" 
 								onClick="return confirm('¿Eliminar al usuario: ${entry.id}?');">Delete</a></td>
 						</c:if>
