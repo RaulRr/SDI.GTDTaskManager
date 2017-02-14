@@ -86,7 +86,20 @@
 							</c:if>
 							<td class="col-*-*"><a href="cerrarTarea?=${entry.id}">Finish</a></td>
 						</tr>
-						
+						<c:if
+							test="${categoria.equals('today') && i.index < listaTareas.size() && !entry.categoryId.equals(listaTareas[i.index+1].categoryId)}">
+							<tr>
+								<th colspan="7" class="alert alert-info" style="height:50px">
+								</th>
+							</tr>
+						</c:if>
+						<c:if
+							test="${categoria.equals('week') && i.index < listaTareas.size() && !entry.planned.getDate().equals(listaTareas[i.index+1].planned.getDate())}">
+							<tr>
+								<th colspan="7" class="alert alert-info" style="height:50px">
+								</th>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</table>
 			</div>

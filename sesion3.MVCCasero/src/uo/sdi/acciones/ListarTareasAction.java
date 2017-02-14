@@ -14,7 +14,6 @@ import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
-import uo.sdi.dto.types.UserStatus;
 import alb.util.log.Log;
 
 public class ListarTareasAction implements Accion {
@@ -91,6 +90,7 @@ public class ListarTareasAction implements Accion {
 			listaCategorias = Services.getTaskService().findCategoriesByUserId(
 					usuario.getId());
 			request.setAttribute("listaCategorias", listaCategorias);
+			request.setAttribute("separador", "");
 
 			Log.debug(
 					"Obtenida lista de categorías conteniendo [%d] categorías",
