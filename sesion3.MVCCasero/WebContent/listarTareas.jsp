@@ -12,23 +12,24 @@
 <body>
 	<div>
 		<form action="añadirTarea" method="POST">
-		<table class="table table-striped table-condensed" style="width: 50%"
+			<table class="table table-striped table-condensed" style="width: 50%"
 				align="center">
 				<tr>
 					<th>Nueva Tarea:</th>
-					<td id="nuevaTarea"><input type="text" name="nuevaTarea" value=""></td>
+					<td id="nuevaTarea"><input type="text" name="nuevaTarea"
+						value=""></td>
 				</tr>
 				<tr>
-					<td/>
+					<td />
 					<td><input type="submit" value="NuevaTarea"></td>
-				</tr>				
+				</tr>
 			</table>
-			
-			
+
+
 		</form>
 	</div>
 	<div class="container">
-		<h3 align="center">Tareas:</h3>
+		<h3 align="center">Tareas: ${categoria}</h3>
 		<div class="row">
 			<div class="col-*-6">
 				<table
@@ -37,9 +38,22 @@
 					<tr class="row">
 						<th class="col-*-*">Categorias:</th>
 					</tr>
+					<tr class="row" id="item_Todas">
+						<td class="col-*-*"><a href="listarTareas">Todas</a></td>
+					</tr>
+					<tr class="row" id="item_Inbox">
+						<td class="col-*-*"><a href="listarTareas?category=inbox">Inbox</a></td>
+					</tr>
+					<tr class="row" id="item_Today">
+						<td class="col-*-*"><a href="listarTareas?category=today">Hoy</a></td>
+					</tr>
+					<tr class="row" id="item_Week">
+						<td class="col-*-*"><a href="listarTareas?category=week">Semana</a></td>
+					</tr>
 					<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 						<tr class="row" id="item_${i.index}">
-							<td class="col-*-*">${entry.name}</td>
+							<td class="col-*-*"><a
+								href="listarTareas?category=${entry.id}">${entry.name}</a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -59,7 +73,14 @@
 							<td class="col-*-*">${entry.title}</td>
 							<td class="col-*-*">${entry.comments}</td>
 							<td class="col-*-*">${entry.created}</td>
-							<td class="col-*-*">${entry.planned}</td>
+							<c:if test="${entry.planned < date}">
+								<td class="col-*-*"><div
+										class="alert alert-danger alert-dismissable">${entry.planned}
+									</div></td>
+							</c:if>
+							<c:if test="${entry.planned >= date}">
+								<td class="col-*-*">${entry.planned}</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</table>
