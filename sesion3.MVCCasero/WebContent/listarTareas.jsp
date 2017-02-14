@@ -10,26 +10,22 @@
 	rel="stylesheet">
 </head>
 <body>
-	<div>
-		<form action="añadirTarea" method="POST">
-			<table class="table table-striped table-condensed" style="width: 50%"
-				align="center">
-				<tr>
-					<th>Nueva Tarea:</th>
-					<td id="nuevaTarea"><input type="text" name="nuevaTarea"
-						value=""></td>
-				</tr>
-				<tr>
-					<td />
-					<td><input type="submit" value="NuevaTarea"></td>
-				</tr>
-			</table>
-
-
-		</form>
-	</div>
 	<div class="container">
 		<h3 align="center">Tareas: ${categoria}</h3>
+		<div class="container">
+			<form action="añadirTarea" method="POST">
+				<table class="table table-bordered table-condensed"
+					style="width: 54%" align="center">
+					<tr>
+						<th>Nueva Tarea:</th>
+						<td id="nuevaTarea"><input type="text" name="nuevaTarea"
+							value="nombre" style="width: 95%"></td>
+						<td><input type="submit" value="NuevaTarea" style="width: 90%"></td>
+
+					</tr>
+				</table>
+			</form>
+		</div>
 		<div class="row">
 			<div class="col-*-6">
 				<table
@@ -89,14 +85,14 @@
 						<c:if
 							test="${categoria.equals('today') && i.index < listaTareas.size() && !entry.categoryId.equals(listaTareas[i.index+1].categoryId)}">
 							<tr>
-								<th colspan="7" class="alert alert-info" style="height:50px">
+								<th colspan="7" class="alert alert-info" style="height: 50px">
 								</th>
 							</tr>
 						</c:if>
 						<c:if
 							test="${categoria.equals('week') && i.index < listaTareas.size() && !entry.planned.getDate().equals(listaTareas[i.index+1].planned.getDate())}">
 							<tr>
-								<th colspan="7" class="alert alert-info" style="height:50px">
+								<th colspan="7" class="alert alert-info" style="height: 50px">
 								</th>
 							</tr>
 						</c:if>
