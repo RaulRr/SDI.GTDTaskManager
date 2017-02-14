@@ -65,23 +65,28 @@
 					<tr class="row">
 						<th class="col-*-*">Title</th>
 						<th class="col-*-*">Comments</th>
+						<th class="col-*-*">Category</th>
 						<th class="col-*-*">Created</th>
 						<th class="col-*-*">Planned</th>
+						<th class="col-*-*">Close Task</th>
 					</tr>
 					<c:forEach var="entry" items="${listaTareas}" varStatus="i">
 						<tr class="row" id="item_${i.index}">
 							<td class="col-*-*">${entry.title}</td>
 							<td class="col-*-*">${entry.comments}</td>
+							<td class="col-*-*">${entry.categoryId}</td>
 							<td class="col-*-*">${entry.created}</td>
 							<c:if test="${entry.planned < date}">
 								<td class="col-*-*"><div
 										class="alert alert-danger alert-dismissable">${entry.planned}
 									</div></td>
 							</c:if>
-							<c:if test="${entry.planned >= date}">
+							<c:if test="${entry.planned >= date || entry.planned == null}">
 								<td class="col-*-*">${entry.planned}</td>
 							</c:if>
+							<td class="col-*-*"><a href="cerrarTarea?=${entry.id}">Finish</a></td>
 						</tr>
+						
 					</c:forEach>
 				</table>
 			</div>
