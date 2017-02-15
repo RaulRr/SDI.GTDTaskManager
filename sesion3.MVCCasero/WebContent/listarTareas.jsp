@@ -10,6 +10,9 @@
 	rel="stylesheet">
 </head>
 <body>
+	<center>
+		<%@ include file="pieDePagina.jsp"%>
+	</center>
 	<div class="container">
 		<h3 align="center">Tareas: ${categoria}</h3>
 		<div class="container">
@@ -103,7 +106,6 @@
 		<center>
 			<a id="paginaAnterior_link_id" href="principalUsuario">Volver
 				atrás</a>
-			<%@ include file="pieDePagina.jsp"%>
 		</center>
 	</div>
 </body>

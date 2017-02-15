@@ -46,10 +46,10 @@ public class AñadirTareaAction implements Accion {
 
 			TaskService taskService = Services.getTaskService();
 			taskService.createTask(task);//Service añadede la fecha de creacion
-
+			
+			
 			Log.debug("Se ha creado una nueva tarea [%s]",
 					nombre);
-
 		}
 		catch (BusinessException b) {
 			Log.debug("Algo ha ocurrido creando la nueva tarea del usuario");

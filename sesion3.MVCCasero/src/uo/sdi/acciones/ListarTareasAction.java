@@ -36,6 +36,7 @@ public class ListarTareasAction implements Accion {
 		//nos devuelve la categoria en la que estabamos
 		if (category!= null && category.equals("recargar")){
 			category = (String)session.getAttribute("categoria");
+			request.setAttribute("mensajeParaElUsuario", "tarea");
 		}
 		
 		System.out.println(category);
@@ -120,8 +121,19 @@ public class ListarTareasAction implements Accion {
 			Collections.sort(lista, new Comparator<Task>() {
 				@Override
 				public int compare(Task o1, Task o2) {
-					if(o1.getCategoryId().compareTo(o2.getCategoryId()) == 0)
+					if(o1.getCategoryId() == null)
+						return -1;
+					if(o2.getCategoryId() == null)
+						return 1;
+					
+					if(o1.getCategoryId().compareTo(o2.getCategoryId()) == 0){
+						if(o1.getPlanned() == null)
+							return -1;
+						if(o2.getPlanned() == null)
+							return 1;
+						
 						return o1.getPlanned().compareTo(o2.getPlanned());
+					}
 					else
 						return o1.getCategoryId().compareTo(o2.getCategoryId());
 				}
@@ -132,6 +144,11 @@ public class ListarTareasAction implements Accion {
 			Collections.sort(lista, new Comparator<Task>() {
 				@Override
 				public int compare(Task o1, Task o2) {
+					if(o1.getPlanned() == null)
+						return -1;
+					if(o2.getPlanned() == null)
+						return 1;
+					
 					if(o1.getPlanned().compareTo(o2.getPlanned()) == 0)
 						return o1.getTitle().compareTo(o2.getTitle());
 					else
@@ -144,6 +161,10 @@ public class ListarTareasAction implements Accion {
 			Collections.sort(lista, new Comparator<Task>() {
 				@Override
 				public int compare(Task o1, Task o2) {
+					if(o1.getPlanned() == null)
+						return -1;
+					if(o2.getPlanned() == null)
+						return 1;
 					return o1.getPlanned().compareTo(o2.getPlanned());
 				}
 			});
