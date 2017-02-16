@@ -20,7 +20,7 @@
 				</tr>
 				<tr>
 					<th>Comments:</th>
-					<td id="comment"><textarea rows="6" cols="100">${comentarios}</textarea></td>
+					<td id="comment"><textarea name = "comment"rows="6" cols="100">${comentarios}</textarea></td>
 				</tr>
 				<tr>
 					<th>New Planned Date:</th>
@@ -29,7 +29,7 @@
 				<tr>
 					<th>Categories:</th>
 					<td align="center">
-						<select name="categoria" size="1">
+						<select name="category" size="1">
 							<option value="none">None</option>
 							<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 								<c:choose>
