@@ -1,10 +1,12 @@
 package uo.sdi.acciones;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import alb.util.date.DateUtil;
 import alb.util.log.Log;
 import uo.sdi.acciones.Accion;
 import uo.sdi.business.Services;
@@ -26,46 +28,57 @@ public class EditarTareaAction implements Accion {
 		String title = request.getParameter("title");
 		String comment = request.getParameter("comment");
 		String category = request.getParameter("category");
-		String date = request.getParameter("date");
-		HttpSession  sesion = request.getSession();
+		String date = request.getParameter("date");//yyyy-MM-dd
+		HttpSession  session = request.getSession();
+		
+		Task task;
+		User user = (User)session.getAttribute("user");
 		
 		Long categoryId = null;
-
-		Task task;
-
+		Long taskId = (Long)session.getAttribute("editTarea");
+		Date realDate = null;
+		
 		try{
-			category = (String)sesion.getAttribute("categoria");
-			categoryId = Long.parseLong(category);
-		}catch (NumberFormatException e){
+			categoryId = Long.parseLong(category);			
+		}catch(NumberFormatException e){
+			categoryId = null;
+		}
+		
+		try{
+			realDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+			
+		}catch(Exception e){
+			realDate = null;
+		}
 
-		}		
 		try {
-
-			task = toTask(((User)sesion.getAttribute("user")), nombre, 
-					categoryId);
-
-			if(category != null && category.equals("today"))
-				task.setPlanned(DateUtil.today());
-
 			TaskService taskService = Services.getTaskService();
-			taskService.createTask(task);//Service añadede la fecha de creacion
+			task = toTask(user, title, comment, categoryId, realDate);
+			task.setId(taskId);
 			
+			taskService.updateTask(task);
 			
-			Log.debug("Se ha creado una nueva tarea [%s]",
-					nombre);
+			//Volvemos a la lista no necesitamos guardar el id de tarea
+			session.removeAttribute("editTarea"); 
+			Log.debug("El usuario [%s] ha modificado con exito la tarea [%s]", 
+					user.getLogin(), title);
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido creando la nueva tarea del usuario");
+			Log.debug("El usuario [%s] ha fallado al tratar de editar la tarea"
+					+ " [%s]", user.getLogin(), title);
 			resultado="FRACASO";
 		}
 		return resultado;
 	}
 	
-	private Task toTask(User user, String nombre, Long idCategoria){
+	private Task toTask(User user, String nombre, String comentario,
+			Long idCategoria, Date fecha){
 		return new Task()
 		.setUserId(user.getId())
 		.setTitle(nombre)
-		.setCategoryId(idCategoria);
+		.setComments(comentario)
+		.setCategoryId(idCategoria)
+		.setPlanned(fecha);
 	}
 	
 	@Override

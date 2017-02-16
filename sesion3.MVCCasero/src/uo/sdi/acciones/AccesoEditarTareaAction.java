@@ -34,6 +34,8 @@ public class AccesoEditarTareaAction implements Accion {
 					Services.getTaskService().
 					findCategoriesByUserId(usuario.getId()));
 			
+			session.setAttribute("editTarea", taskId);
+			
 			Log.debug("El usuario [%s] trata de modificar la tarea [%s]",
 					usuario.getLogin(), task.getTitle());
 			
