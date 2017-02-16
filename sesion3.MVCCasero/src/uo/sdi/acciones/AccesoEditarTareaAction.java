@@ -50,8 +50,13 @@ public class AccesoEditarTareaAction implements Accion {
 		request.setAttribute("titulo", task.getTitle());
 		if(task.getComments() != null)
 			request.setAttribute("comentarios", task.getComments());
-		if(task.getPlanned() != null)
-			request.setAttribute("entrega", task.getPlanned());
+		if(task.getPlanned() != null){
+			String date = alb.util.date.DateUtil.toString(task.getPlanned());//dd/MM/yyyy
+			
+			date = date.replace('/', '-'); //para que lo reconozca el html
+			date = date.split("-")[2]+"-"+date.split("-")[1]+"-"+date.split("-")[0];
+			request.setAttribute("fecha", date);
+			}
 		if(task.getCategoryId() != null)
 			request.setAttribute("categoria", task.getCategoryId());
 	}
