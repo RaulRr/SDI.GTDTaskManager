@@ -15,7 +15,7 @@
 			<h3 align="center">Registrar nuevo Usuario</h3>
 		</center>
 		<form action="registrarUsuario" method="POST">
-			<table class="table table-striped table-condensed" style="width: 50%"
+			<table class="table table-striped table-condensed" style="width: 90%"
 				align="center">
 				<tr>
 					<th>Login:</th>

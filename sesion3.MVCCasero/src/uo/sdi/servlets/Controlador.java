@@ -131,7 +131,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("principalUsuario", new VolverAtrasAction());
 		mapaRegistrado.put("listarTareas", new ListarTareasAction());
 		mapaRegistrado.put("añadirTarea", new AñadirTareaAction());
-		mapaRegistrado.put("editarTarea", new AccesoEditarTarea());
+		mapaRegistrado.put("editarTarea", new AccesoEditarTareaAction());
 		mapaRegistrado.put("cerrarTarea", new CerrarTareaAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		

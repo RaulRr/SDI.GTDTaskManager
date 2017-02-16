@@ -19,25 +19,30 @@
 				align="center">
 				<tr>
 					<th>Title:</th>
-					<td id="title"><input type="text" name="title">${titulo}</td>
+					<td id="title"><input type="text" style="width:100%; height:30px;"  name="title" value="${titulo}"></td>
 				</tr>
 				<tr>
 					<th>Comments:</th>
-					<td id="comment"><textarea rows="6" cols="100">
-						${comentarios}
-					</textarea></td>
+					<td id="comment"><textarea rows="6" cols="100">${comentarios}</textarea></td>
 				</tr>
 				<tr>
 					<th>Planned Date:</th>
-					<td id="planned"><input type="text" name="planned">${entrega}</td>
+					<td id="planned"><input type="text" name="planned" value="${entrega}"></td>
 				</tr>
 				<tr>
 					<th>Categories:</th>
 					<td align="center">
 						<select name="categoria" size="1">
-							<option value="a">Ninguna</option>
+							<option value="none">None</option>
 							<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
-								<option value="${entry.id}">${entry.name}</option>
+								<c:choose>
+									<c:when test="${entry.id == categoria}">
+										<option selected value="${entry.id}">${entry.name}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${entry.id}">${entry.name}</option>
+									</c:otherwise>
+								</c:choose>								
 							</c:forEach>
 						</select>
 					</td>

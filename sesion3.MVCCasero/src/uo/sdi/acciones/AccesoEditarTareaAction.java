@@ -14,7 +14,7 @@ import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
 
 
-public class AccesoEditarTarea implements Accion {
+public class AccesoEditarTareaAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
