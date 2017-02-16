@@ -71,7 +71,7 @@
 					</tr>
 					<c:forEach var="entry" items="${listaTareas}" varStatus="i">
 						<tr class="row" id="item_${i.index}">
-							<td class="col-*-*">${entry.title}</td>
+							<td class="col-*-*">${entry.title}(<a id="editarTarea${entry.title}" href="editarTarea?id=${entry.id}"  >Edit</a>)</td>
 							<td class="col-*-*">${entry.comments}</td>
 							<td class="col-*-*">${entry.categoryId}</td>
 							<td class="col-*-*">${entry.created}</td>
