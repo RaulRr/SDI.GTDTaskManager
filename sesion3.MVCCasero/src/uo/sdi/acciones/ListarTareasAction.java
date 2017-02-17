@@ -34,9 +34,10 @@ public class ListarTareasAction implements Accion {
 
 		//Este if se encarga de comprobar la categoria del crear o eliminar tarea del que provenimos
 		//nos devuelve la categoria en la que estabamos
-		if (category!= null && category.equals("recargar")){
-			category = (String)session.getAttribute("categoria");
-			request.setAttribute("mensajeParaElUsuario", "tarea");
+		if (category!= null && (category.equals("recargar") || 
+				category.equals("editar"))){
+			request.setAttribute("mensajeParaElUsuario", category);
+			category = (String)session.getAttribute("categoria");		
 		}
 		
 		System.out.println(category);

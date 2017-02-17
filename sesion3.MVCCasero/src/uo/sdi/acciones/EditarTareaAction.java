@@ -38,13 +38,13 @@ public class EditarTareaAction implements Accion {
 		Long taskId = (Long)session.getAttribute("editTarea");
 		Date realDate = null;
 		
-		try{
+		try{//Si se selecciono categoria y cual
 			categoryId = Long.parseLong(category);			
 		}catch(NumberFormatException e){
 			categoryId = null;
 		}
 		
-		try{
+		try{//si se selecciono fecha y cual
 			realDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
 			
 		}catch(Exception e){
@@ -54,11 +54,11 @@ public class EditarTareaAction implements Accion {
 		try {
 			TaskService taskService = Services.getTaskService();
 			task = toTask(user, title, comment, categoryId, realDate);
-			task.setId(taskId);
+			task.setId(taskId); //recogemos el id de tarea de la sesion
 			
 			taskService.updateTask(task);
 			
-			//Volvemos a la lista no necesitamos guardar el id de tarea
+			//Volvemos a la lista no necesitamos guardar el id de la tarea
 			session.removeAttribute("editTarea"); 
 			Log.debug("El usuario [%s] ha modificado con exito la tarea [%s]", 
 					user.getLogin(), title);
@@ -66,6 +66,7 @@ public class EditarTareaAction implements Accion {
 		catch (BusinessException b) {
 			Log.debug("El usuario [%s] ha fallado al tratar de editar la tarea"
 					+ " [%s]", user.getLogin(), title);
+			session.setAttribute("mensaje", b.getMessage());
 			resultado="FRACASO";
 		}
 		return resultado;
