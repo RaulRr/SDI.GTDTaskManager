@@ -33,6 +33,7 @@ public class EliminarUsuarioAction implements Accion {
 			
 			listaUsuarios=adminService.findAllUsers();
 			request.setAttribute("listaUsuarios", listaUsuarios);
+			request.setAttribute("mensajeVerde", "Usuario eliminado correctamente");
 			
 			
 		}

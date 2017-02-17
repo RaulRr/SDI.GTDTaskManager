@@ -24,20 +24,19 @@
 						<td id="nuevaTarea"><input type="text" name="nuevaTarea"
 							value="nombre" style="width: 95%"></td>
 						<td><input type="submit" value="NuevaTarea"
-							style="width: 90%"></td>
+							style="width: 100%"></td>
 						<c:if
 							test="${filtro.equals('no') && !categoria.equals('inbox') && !categoria.equals('week') 
 							&& !categoria.equals('today') && categoria != null}">
-							<td></td>
-							<td><a href="listarTareas?category=${categoria}&filtro=si">Mostrar
+							<td><a href="listarTareas?category=${categoria}&filtro=si">
+							<span class="glyphicon glyphicon-chevron-down"></span> Mostrar
 									terminadas</a></td>
 						</c:if>
 						<c:if
 							test="${filtro.equals('si') && !categoria.equals('inbox') && 
 						!categoria.equals('week') && !categoria.equals('today') && categoria != null}">
-							<td></td>
-							<td><a href="listarTareas?category=${categoria}&filtro=no">Ocultar
-									terminadas</a></td>
+							<td><a href="listarTareas?category=${categoria}&filtro=no">
+							 <span class="glyphicon glyphicon-chevron-up"></span> Ocultar terminadas</a></td>
 						</c:if>
 					</tr>
 				</table>
@@ -76,9 +75,9 @@
 						<tr class="row" id="item_${i.index}">
 							<td class="col-*-*"><a
 								href="listarTareas?category=${entry.id}">${entry.name}</a></td>
-							<td class="col-*-*"><a href="modificarCategoria/${entry.id}">Modificar</a></td>
+							<td class="col-*-*"><a href="modificarCategoria/${entry.id}"><span class="glyphicon glyphicon-pencil"></span></a></td>
 							<td class="col-*-*"><a href="eliminarCategoria?id=${entry.id}=${entry.name}"
-								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');">X</a></td>
+								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');"><span class="glyphicon glyphicon-trash"></span></a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -110,7 +109,8 @@
 							<td class="col-*-*">${entry.title}(<c:if
 									test="${entry.finished == null}">
 									<a id="editarTarea${entry.title}"
-										href="editarTarea?id=${entry.id}">Edit</a>
+										href="editarTarea?id=${entry.id}">
+										<span class="glyphicon glyphicon-pencil"></span> Edit</a>
 								</c:if>)
 							</td>
 							<td class="col-*-*">${entry.comments}</td>
@@ -125,7 +125,7 @@
 								<td class="col-*-*">${entry.planned}</td>
 							</c:if>
 							<td class="col-*-*"><c:if test="${entry.finished == null}">
-									<a href="cerrarTarea?=${entry.id}">Finish</a>
+									<a href="cerrarTarea?=${entry.id}"><span class="glyphicon glyphicon-ok"></span> Finish</a>
 								</c:if></td>
 						</tr>
 						<c:if
@@ -147,8 +147,7 @@
 			</div>
 		</div>
 		<center>
-			<a id="paginaAnterior_link_id" href="principalUsuario">Volver
-				atrás</a>
+			<a id="paginaAnterior_link_id" href="principalUsuario"><span class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
 		</center>
 	</div>
 </body>

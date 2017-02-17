@@ -50,7 +50,7 @@
 				</tr>
 			</table>
 		</form>
-		<a id="paginaAnterior_link_id" href="login.jsp">Volver atrás</a>
+		<a id="paginaAnterior_link_id" href="listarTareas"><span class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
 		<%@ include file="pieDePagina.jsp"%>
 
 	</div>

@@ -10,10 +10,14 @@
 	rel="stylesheet">
 </head>
 <body>
+	<center>
+		<%@ include file="pieDePagina.jsp"%>
+	</center>
 	<div class="container">
 		<div class="table-responsive">
 			<h3 align="center">Usuarios</h3>
-			<table class="table table-striped table-condensed table-bordered table-hover"
+			<table
+				class="table table-striped table-condensed table-bordered table-hover"
 				align="center">
 				<tr class="row">
 					<th class="col-*-*">ID</th>
@@ -26,29 +30,31 @@
 						<td class="col-*-*">${entry.id}</td>
 						<td class="col-*-*">${entry.login}</td>
 						<td class="col-*-*">${entry.email}</td>
-						
+
 						<c:if test="${entry.isAdmin==true}">
 							<td class="alert alert-info"><strong>${entry.status}</strong></td>
 							<td class="col*-*"></td>
 						</c:if>
 						<c:if test="${entry.isAdmin==false}">
 							<c:if test="${entry.status == 'ENABLED'}">
-								<td class="alert alert-success"><a href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
+								<td class="alert alert-success"><a
+									href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
 							</c:if>
 							<c:if test="${entry.status != 'ENABLED'}">
-								<td class="alert alert-danger"><a href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
+								<td class="alert alert-danger"><a
+									href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
 							</c:if>
-							<td class="col*-*"><a href="eliminarUsuario?id=${entry.id}=${entry.login}" 
+							<td class="col*-*"><a
+								href="eliminarUsuario?id=${entry.id}=${entry.login}"
 								onClick="return confirm('¿Eliminar al usuario: ${entry.id}?');">Delete</a></td>
 						</c:if>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
-		<center>
-			<a id="paginaAnterior_link_id" href="principalUsuario">Volver atrás</a>
-			<%@ include file="pieDePagina.jsp"%>
-		</center>
 	</div>
+	<center>
+			<a id="paginaAnterior_link_id" href="principalUsuario"><span class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
+	</center>
 </body>
 </html>

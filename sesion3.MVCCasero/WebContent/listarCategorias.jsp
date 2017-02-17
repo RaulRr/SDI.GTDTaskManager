@@ -33,7 +33,7 @@
 			</table>
 		</div>
 		<center>
-			<a id="paginaAnterior_link_id" href="login.jsp">Volver atrás</a>
+			<a id="paginaAnterior_link_id" href="login.jsp"><span class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
 			<%@ include file="pieDePagina.jsp"%>
 		</center>
 	</div>

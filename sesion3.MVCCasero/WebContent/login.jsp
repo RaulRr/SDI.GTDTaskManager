@@ -17,12 +17,12 @@
 			<br>
 			<table align="center" class="table table-condensed" style="width: 50%">
 				<tr>
-					<td align="left">Su identificador de usuario:</td>
+					<td align="left"><span class="glyphicon glyphicon-user"></span> Su identificador de usuario:</td>
 					<td colspan="3"><input type="text" name="nombreUsuario" align="left"
 						size="15"></td>
 				</tr>
 				<tr>
-					<td align="left">Su contraseña:</td>
+					<td align="left"><span class="glyphicon glyphicon-asterisk"></span> Su contraseña:</td>
 					<td colspan="3"><input type="password" name="passUsuario" align="left"
 						size="15"></td>
 				</tr>
@@ -36,7 +36,8 @@
 					<td colspan="3">
 						<div class="alert alert-info">
 							<center>
-								<a id="listarCategorias_link_id" href="listarCategorias">Lista
+								<a id="listarCategorias_link_id" href="listarCategorias"><span
+									class="glyphicon glyphicon-list"></span> Lista
 									de categorias</a>
 							</center>
 						</div>
