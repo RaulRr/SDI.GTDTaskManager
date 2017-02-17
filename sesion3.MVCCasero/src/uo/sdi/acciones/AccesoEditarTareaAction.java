@@ -21,10 +21,25 @@ public class AccesoEditarTareaAction implements Accion {
 			HttpServletResponse response) {
 
 		String resultado="EXITO";
-		Long taskId = Long.parseLong(request.getQueryString().split("=")[1]);
+		Long taskId = null;
 		HttpSession session = request.getSession();
 		User usuario = (User) session.getAttribute("user");
+		
+		
 		try{
+			//viene desde listar tareas?
+			taskId = Long.parseLong(request.getQueryString().split("=")[1]);
+			
+		}catch(Exception e){}
+		
+		try{
+			if(taskId == null){//se fallo al modificar. recargar pagina
+				taskId = (Long)session.getAttribute("editTarea"); 
+				request.setAttribute("mensajeParaElUsuario", 
+						session.getAttribute("mensaje"));
+				session.removeAttribute("mensaje");
+			}
+			
 			TaskService taskService = Services.getTaskService();
 			Task task = taskService.findTaskById(taskId);
 			
@@ -34,15 +49,15 @@ public class AccesoEditarTareaAction implements Accion {
 					Services.getTaskService().
 					findCategoriesByUserId(usuario.getId()));
 			
-			session.setAttribute("editTarea", taskId);
+			session.setAttribute("editTarea", taskId);//en sesion la id
 			
-			Log.debug("El usuario [%s] trata de modificar la tarea [%s]",
-					usuario.getLogin(), task.getTitle());
+			Log.debug("El usuario [%s] accede al editor de tareas",
+					usuario.getLogin());
 			
 			
 		}catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido con el usuario [%s] tratando de editar "
-					+ "la tarea [%s]", usuario.getLogin(), taskId);
+			Log.debug("Algo ha ocurrido con el usuario [%s] tratando de acceder"
+					+ " al editor de tarea", usuario.getLogin());
 			resultado="FRACASO";
 		}
 		return resultado;
@@ -53,10 +68,12 @@ public class AccesoEditarTareaAction implements Accion {
 		if(task.getComments() != null)
 			request.setAttribute("comentarios", task.getComments());
 		if(task.getPlanned() != null){
-			String date = alb.util.date.DateUtil.toString(task.getPlanned());//dd/MM/yyyy
+			//dd/MM/yyyy
+			String date = alb.util.date.DateUtil.toString(task.getPlanned());
 			
 			date = date.replace('/', '-'); //para que lo reconozca el html
-			date = date.split("-")[2]+"-"+date.split("-")[1]+"-"+date.split("-")[0];
+			date = date.split("-")[2]+"-"+date.split("-")[1]+
+					"-"+date.split("-")[0];
 			request.setAttribute("fecha", date);
 			}
 		if(task.getCategoryId() != null)
