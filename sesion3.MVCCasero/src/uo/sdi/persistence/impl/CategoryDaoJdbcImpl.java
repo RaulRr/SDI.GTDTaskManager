@@ -84,7 +84,7 @@ public class CategoryDaoJdbcImpl implements CategoryDao {
 	}
 
 	@Override
-	public Category findByName(String category) {
+	public Category findByName(String category, Long userId) {
 		return jdbcTemplate.queryForObject(
 				"CATEGORY_FIND_BY_NAME", 
 				new CategoryDtoMapper(), 

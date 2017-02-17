@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import alb.util.log.Log;
 import uo.sdi.acciones.Accion;
 import uo.sdi.business.AdminService;
+import uo.sdi.business.Services;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.business.impl.admin.AdminServiceImpl;
 import uo.sdi.dto.User;
 import uo.sdi.dto.types.UserStatus;
 
@@ -29,7 +29,7 @@ public class ModificarStatusAction implements Accion {
 		List<User> listaUsuarios;
 		
 		try {
-			AdminService adminService = new AdminServiceImpl();
+			AdminService adminService = Services.getAdminService();
 			User user = adminService.findUserById(userId);
 			if(user.getStatus().equals(UserStatus.ENABLED)){
 				adminService.disableUser(userId);

@@ -77,7 +77,7 @@
 							<td class="col-*-*"><a
 								href="listarTareas?category=${entry.id}">${entry.name}</a></td>
 							<td class="col-*-*"><a href="modificarCategoria/${entry.id}">Modificar</a></td>
-							<td class="col-*-*"><a href="eliminarCategoria/${entry.id}"
+							<td class="col-*-*"><a href="eliminarCategoria?id=${entry.id}=${entry.name}"
 								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');">X</a></td>
 						</tr>
 					</c:forEach>

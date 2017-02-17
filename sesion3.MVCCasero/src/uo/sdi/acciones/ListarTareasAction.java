@@ -45,7 +45,7 @@ public class ListarTareasAction implements Accion {
 		//nos devuelve la categoria en la que estabamos
 		if (category!= null && (category.equals("recargar") || 
 				category.equals("editar"))){
-			request.setAttribute("mensajeParaElUsuario", category);
+			request.setAttribute("mensajeVerde", "Tarea añadida correctamente");
 			category = (String)session.getAttribute("categoria");		
 		}
 
@@ -88,7 +88,7 @@ public class ListarTareasAction implements Accion {
 						Long cat = null;
 						if (filtro != null)
 							cat = Services.getTaskService()
-									.findCategoryByName(category).getId();
+									.findCategoryByName(category, usuario.getId()).getId();
 						else
 							cat = Long.parseLong(category);
 						
