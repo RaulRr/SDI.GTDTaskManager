@@ -28,5 +28,6 @@ public interface TaskService {
 	public List<Task> findFinishedTasksByCategoryId(Long catId) throws BusinessException;
 	public List<Task> findFinishedInboxTasksByUserId(Long userId) throws BusinessException;
 	public List<Task> findAllTasksByUserId(Long id)throws BusinessException;
+	public Category findCategoryByName(String category) throws BusinessException;
 
 }

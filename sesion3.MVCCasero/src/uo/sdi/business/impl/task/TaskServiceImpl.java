@@ -179,4 +179,15 @@ public class TaskServiceImpl implements TaskService {
 		});
 	}
 
+	@Override
+	public Category findCategoryByName(final String category)
+			throws BusinessException {
+		return new CommandExecutor<Category>().execute( new Command<Category>() {
+			@Override public Category execute() throws BusinessException {
+				
+				return Persistence.getCategoryDao().findByName(category);
+			}
+		});
+	}
+
 }

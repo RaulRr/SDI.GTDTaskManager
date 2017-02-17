@@ -18,13 +18,27 @@
 		<div class="container">
 			<form action="añadirTarea" method="POST">
 				<table class="table table-bordered table-condensed"
-					style="width: 54%" align="center">
+					style="width: 70%" align="center">
 					<tr>
 						<th>Nueva Tarea:</th>
 						<td id="nuevaTarea"><input type="text" name="nuevaTarea"
 							value="nombre" style="width: 95%"></td>
-						<td><input type="submit" value="NuevaTarea" style="width: 90%"></td>
-
+						<td><input type="submit" value="NuevaTarea"
+							style="width: 90%"></td>
+						<c:if
+							test="${filtro.equals('no') && !categoria.equals('inbox') && !categoria.equals('week') 
+							&& !categoria.equals('today') && categoria != null}">
+							<td></td>
+							<td><a href="listarTareas?category=${categoria}&filtro=si">Mostrar
+									termiandas</a></td>
+						</c:if>
+						<c:if
+							test="${filtro.equals('si') && !categoria.equals('inbox') && 
+						!categoria.equals('week') && !categoria.equals('today') && categoria != null}">
+							<td></td>
+							<td><a href="listarTareas?category=${categoria}&filtro=no">Ocultar
+									termiandas</a></td>
+						</c:if>
 					</tr>
 				</table>
 			</form>
@@ -71,7 +85,12 @@
 					</tr>
 					<c:forEach var="entry" items="${listaTareas}" varStatus="i">
 						<tr class="row" id="item_${i.index}">
-							<td class="col-*-*">${entry.title}(<a id="editarTarea${entry.title}" href="editarTarea?id=${entry.id}"  >Edit</a>)</td>
+							<td class="col-*-*">${entry.title}(<c:if
+									test="${entry.finished == null}">
+									<a id="editarTarea${entry.title}"
+										href="editarTarea?id=${entry.id}">Edit</a>
+								</c:if>)
+							</td>
 							<td class="col-*-*">${entry.comments}</td>
 							<td class="col-*-*">${entry.categoryId}</td>
 							<td class="col-*-*">${entry.created}</td>
@@ -83,7 +102,9 @@
 							<c:if test="${entry.planned >= date || entry.planned == null}">
 								<td class="col-*-*">${entry.planned}</td>
 							</c:if>
-							<td class="col-*-*"><a href="cerrarTarea?=${entry.id}">Finish</a></td>
+							<td class="col-*-*"><c:if test="${entry.finished == null}">
+									<a href="cerrarTarea?=${entry.id}">Finish</a>
+								</c:if></td>
 						</tr>
 						<c:if
 							test="${categoria.equals('today') && i.index < listaTareas.size() && !entry.categoryId.equals(listaTareas[i.index+1].categoryId)}">

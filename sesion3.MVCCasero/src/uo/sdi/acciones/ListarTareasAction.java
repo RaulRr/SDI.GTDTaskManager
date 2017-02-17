@@ -26,20 +26,36 @@ public class ListarTareasAction implements Accion {
 		HttpSession session = request.getSession();
 		User usuario = (User) session.getAttribute("user");
 		String category = null;
+		String filtro = null;
 		try {
-			category = request.getQueryString().split("=")[1];
-		} catch (NullPointerException n) {
+			category = request.getQueryString().split("&")[0].split("=")[1];
+			if(category.contains("%20")){
+				String[] cat = category.split("%20");
+				category = "";
+				for(String s : cat)
+					category += " " + s;
+				category = category.substring(1);
+			}
+			//category = request.getQueryString().split("=")[1];
+			filtro = request.getQueryString().split("&")[1].split("=")[1];
+		} catch (Exception n) {
 
 		}
-
-		//Este if se encarga de comprobar la categoria del crear o eliminar tarea del que provenimos
-		//nos devuelve la categoria en la que estabamos
-		if (category!= null && category.equals("recargar")){
-			category = (String)session.getAttribute("categoria");
+		System.out.print(category);
+		System.out.print(filtro);
+		// Este if se encarga de comprobar la categoria del crear o eliminar
+		// tarea del que provenimos
+		// nos devuelve la categoria en la que estabamos
+		if (category != null && category.equals("recargar")) {
+			category = (String) session.getAttribute("categoria");
 			request.setAttribute("mensajeParaElUsuario", "tarea");
 		}
-		
-		System.out.println(category);
+
+		if (filtro == null || filtro.equals("no"))
+			request.getSession().setAttribute("filtro", "no");
+		else
+			request.getSession().setAttribute("filtro", "si");
+
 		List<Task> listaTareas;
 		List<Category> listaCategorias;
 
@@ -71,7 +87,13 @@ public class ListarTareasAction implements Accion {
 				// para sacar la categoría personalizada
 				else
 					try {
-						Long cat = Long.parseLong(category);
+						Long cat = null;
+						if (filtro != null)
+							cat = Services.getTaskService()
+									.findCategoryByName(category).getId();
+						else
+							cat = Long.parseLong(category);
+						
 						category = Services.getTaskService()
 								.findCategoryById(cat).getName();
 						listaTareas = Services.getTaskService()
@@ -80,6 +102,16 @@ public class ListarTareasAction implements Accion {
 						for (Task t : listaTareas) {
 							if (t.getUserId() != usuario.getId())
 								listaTareas.remove(t);
+						}
+						if (filtro != null && filtro.equals("si")) {
+							List<Task> listaAcabadas = Services
+									.getTaskService()
+									.findFinishedTasksByCategoryId(cat);
+							for (Task t : listaAcabadas) {
+								if (t.getUserId() != usuario.getId())
+									listaAcabadas.remove(t);
+							}
+							listaTareas.addAll(listaAcabadas);
 						}
 					} catch (Exception e) {
 						// Si da excepción, es porque se ha metido una categoría
@@ -121,20 +153,19 @@ public class ListarTareasAction implements Accion {
 			Collections.sort(lista, new Comparator<Task>() {
 				@Override
 				public int compare(Task o1, Task o2) {
-					if(o1.getCategoryId() == null)
+					if (o1.getCategoryId() == null)
 						return -1;
-					if(o2.getCategoryId() == null)
+					if (o2.getCategoryId() == null)
 						return 1;
-					
-					if(o1.getCategoryId().compareTo(o2.getCategoryId()) == 0){
-						if(o1.getPlanned() == null)
+
+					if (o1.getCategoryId().compareTo(o2.getCategoryId()) == 0) {
+						if (o1.getPlanned() == null)
 							return -1;
-						if(o2.getPlanned() == null)
+						if (o2.getPlanned() == null)
 							return 1;
-						
+
 						return o1.getPlanned().compareTo(o2.getPlanned());
-					}
-					else
+					} else
 						return o1.getCategoryId().compareTo(o2.getCategoryId());
 				}
 			});
@@ -144,12 +175,12 @@ public class ListarTareasAction implements Accion {
 			Collections.sort(lista, new Comparator<Task>() {
 				@Override
 				public int compare(Task o1, Task o2) {
-					if(o1.getPlanned() == null)
+					if (o1.getPlanned() == null)
 						return -1;
-					if(o2.getPlanned() == null)
+					if (o2.getPlanned() == null)
 						return 1;
-					
-					if(o1.getPlanned().compareTo(o2.getPlanned()) == 0)
+
+					if (o1.getPlanned().compareTo(o2.getPlanned()) == 0)
 						return o1.getTitle().compareTo(o2.getTitle());
 					else
 						return o1.getPlanned().compareTo(o2.getPlanned());
@@ -161,14 +192,14 @@ public class ListarTareasAction implements Accion {
 			Collections.sort(lista, new Comparator<Task>() {
 				@Override
 				public int compare(Task o1, Task o2) {
-					if(o1.getPlanned() == null)
+					if (o1.getPlanned() == null)
 						return -1;
-					if(o2.getPlanned() == null)
+					if (o2.getPlanned() == null)
 						return 1;
 					return o1.getPlanned().compareTo(o2.getPlanned());
 				}
 			});
-		break;
+			break;
 
 		default:
 			throw new BusinessException();
