@@ -36,7 +36,6 @@ public class ListarTareasAction implements Accion {
 					category += " " + s;
 				category = category.substring(1);
 			}
-			//category = request.getQueryString().split("=")[1];
 			filtro = request.getQueryString().split("&")[1].split("=")[1];
 		} catch (Exception n) {
 

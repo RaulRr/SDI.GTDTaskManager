@@ -30,24 +30,23 @@
 							&& !categoria.equals('today') && categoria != null}">
 							<td></td>
 							<td><a href="listarTareas?category=${categoria}&filtro=si">Mostrar
-									termiandas</a></td>
+									terminadas</a></td>
 						</c:if>
 						<c:if
 							test="${filtro.equals('si') && !categoria.equals('inbox') && 
 						!categoria.equals('week') && !categoria.equals('today') && categoria != null}">
 							<td></td>
 							<td><a href="listarTareas?category=${categoria}&filtro=no">Ocultar
-									termiandas</a></td>
+									terminadas</a></td>
 						</c:if>
 					</tr>
 				</table>
 			</form>
 		</div>
 		<div class="row">
-			<div class="col-*-6">
+			<div class="col-*-3" style="width: 20%; float: left;">
 				<table
-					class="table table-striped table-condensed table-bordered table-hover"
-					align="center" style="width: 20%; float: left">
+					class="table table-striped table-condensed table-bordered table-hover">
 					<tr class="row">
 						<th class="col-*-*">Categorias:</th>
 						<td class="col-*-*"></td>
@@ -77,19 +76,23 @@
 						<tr class="row" id="item_${i.index}">
 							<td class="col-*-*"><a
 								href="listarTareas?category=${entry.id}">${entry.name}</a></td>
-							<td class="col-*-*"><a
-								href="modificarCategoria/${entry.id}">Modificar</a></td>
-							<td class="col-*-*"><a
-								href="eliminarCategoria/${entry.id}">X</a></td>
+							<td class="col-*-*"><a href="modificarCategoria/${entry.id}">Modificar</a></td>
+							<td class="col-*-*"><a href="eliminarCategoria/${entry.id}"
+								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');">X</a></td>
 						</tr>
 					</c:forEach>
-					<tr class="row" id="item_Week">
-						<td  class="col-*-*" id="nuevaCategoria"><input type="text"
-							name="nuevaCategoria" value="Categoría"></td>
-						<td colspan="2" ><input type="submit" value="Crear" style="width: 100%"></td>
-					</tr>
 				</table>
+				<form action="nuevaCategoria" method="POST">
+					<table class="table table-bordered table-condensed">
+						<tr class="row" id="item_Week">
+							<td class="col-*-*" id="nuevaCategoria"><input type="text"
+								name="nuevaCategoria" value="Categoría"></td>
+							<td colspan="2"><input type="submit" value="Crear"></td>
+						</tr>
+					</table>
+				</form>
 			</div>
+
 			<div class="col-*-6">
 				<table
 					class="table table-striped table-condensed table-bordered table-hover"

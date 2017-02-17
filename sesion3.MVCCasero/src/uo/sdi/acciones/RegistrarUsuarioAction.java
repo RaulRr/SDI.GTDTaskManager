@@ -61,9 +61,9 @@ public class RegistrarUsuarioAction implements Accion {
 
 			// Intentamos registrar al usuario
 			userService.registerUser(user);
-			request.setAttribute("mensajeParaElUsuario", "registro");
+			request.setAttribute("mensajeVerde", "Usuario registrado correctamente.");
 		} catch (BusinessException p) {
-			request.setAttribute("mensajeParaElUsuario", "Error. El usuario ya existe");
+			request.setAttribute("mensajeParaElUsuario", "Error. El usuario ya existe.");
 			resultado = "FRACASO";
 		}
 		return resultado;
