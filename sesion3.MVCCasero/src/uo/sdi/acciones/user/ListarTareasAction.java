@@ -1,4 +1,4 @@
-package uo.sdi.acciones;
+package uo.sdi.acciones.user;
 
 import java.sql.Date;
 import java.util.Collections;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uo.sdi.acciones.Accion;
 import uo.sdi.business.Services;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Category;

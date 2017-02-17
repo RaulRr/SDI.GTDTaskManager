@@ -1,4 +1,4 @@
-package uo.sdi.acciones;
+package uo.sdi.acciones.admin;
 
 import java.util.List;
 

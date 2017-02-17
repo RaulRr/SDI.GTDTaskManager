@@ -1,4 +1,4 @@
-package uo.sdi.acciones;
+package uo.sdi.acciones.user;
 
 import java.util.List;
 

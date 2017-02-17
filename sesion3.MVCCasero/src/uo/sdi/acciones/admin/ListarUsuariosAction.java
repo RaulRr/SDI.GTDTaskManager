@@ -1,10 +1,11 @@
-package uo.sdi.acciones;
+package uo.sdi.acciones.admin;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import uo.sdi.acciones.Accion;
 import uo.sdi.business.AdminService;
 import uo.sdi.business.Services;
 import uo.sdi.business.exception.BusinessException;

@@ -1,8 +1,9 @@
-package uo.sdi.acciones;
+package uo.sdi.acciones.anonimo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import uo.sdi.acciones.Accion;
 import uo.sdi.business.Services;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
