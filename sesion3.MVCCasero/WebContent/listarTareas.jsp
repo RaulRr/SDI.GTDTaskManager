@@ -78,9 +78,9 @@
 							<td class="col-*-*"><a
 								href="listarTareas?category=${entry.id}">${entry.name}</a></td>
 							<td class="col-*-*"><a
-								href="modificarCategoria?category=${entry.id}">Modificar</a></td>
+								href="modificarCategoria/${entry.id}">Modificar</a></td>
 							<td class="col-*-*"><a
-								href="eliminarCategoria?category=${entry.id}">X</a></td>
+								href="eliminarCategoria/${entry.id}">X</a></td>
 						</tr>
 					</c:forEach>
 					<tr class="row" id="item_Week">
