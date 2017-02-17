@@ -51,12 +51,12 @@ public class AccesoEditarTareaAction implements Accion {
 			
 			session.setAttribute("editTarea", taskId);//en sesion la id
 			
-			Log.debug("El usuario [%s] accede al editor de tareas",
+			Log.debug("El usuario %s accede al editor de tareas",
 					usuario.getLogin());
 			
 			
 		}catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido con el usuario [%s] tratando de acceder"
+			Log.debug("Algo ha ocurrido con el usuario %s tratando de acceder"
 					+ " al editor de tarea", usuario.getLogin());
 			resultado="FRACASO";
 		}
