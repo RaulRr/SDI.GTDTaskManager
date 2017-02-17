@@ -32,17 +32,6 @@
 					<a id="registrar_link_id" href="accesoRegistroUsuario">Registrarse</a>
 					</td>
 				</tr>
-				<tr>
-					<td colspan="3">
-						<div class="alert alert-info">
-							<center>
-								<a id="listarCategorias_link_id" href="listarCategorias"><span
-									class="glyphicon glyphicon-list"></span> Lista
-									de categorias</a>
-							</center>
-						</div>
-					</td>
-				</tr>
 			</table>
 		</form>
 		<center>
