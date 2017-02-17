@@ -60,11 +60,11 @@ public class EditarTareaAction implements Accion {
 			
 			//Volvemos a la lista no necesitamos guardar el id de la tarea
 			session.removeAttribute("editTarea"); 
-			Log.debug("El usuario %s ha modificado con exito la tarea %s", 
+			Log.debug("El usuario [%s] ha modificado con exito la tarea [%s]", 
 					user.getLogin(), title);
 		}
 		catch (BusinessException b) {
-			Log.debug("El usuario %s ha fallado al tratar de editar la tarea"
+			Log.debug("El usuario [%s] ha fallado al tratar de editar la tarea"
 					+ " [%s]", user.getLogin(), title);
 			session.setAttribute("mensaje", b.getMessage());
 			resultado="FRACASO";

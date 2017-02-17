@@ -49,7 +49,7 @@ public class ListarTareasAction implements Accion {
 					" correctamente");
 		}
 		if(session.getAttribute("editTarea")!=null){
-			session.removeAttribute("edditTarea");
+			session.removeAttribute("editTarea");
 		}
 
 		if (filtro == null || filtro.equals("no"))

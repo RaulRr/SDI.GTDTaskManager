@@ -41,7 +41,8 @@ public class CrearCategoriaAction implements Accion {
 					"Categoría añadida correctamente.");
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido creando la nueva categoría del usuario");
+			Log.debug("Algo ha ocurrido creando la nueva categoría del usuario"
+					+ " [%s]", ((User)sesion.getAttribute("user")).getLogin());
 			resultado="FRACASO";
 		}
 		return resultado;

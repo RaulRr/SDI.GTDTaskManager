@@ -32,9 +32,12 @@ public class ModificarDatosAction implements Accion {
 			Log.debug("Modificado email de [%s] con el valor [%s]", 
 					userClone.getLogin(), nuevoEmail);
 			session.setAttribute("user",userClone);
+			request.setAttribute("mensajeVerde", "Se ha modificado "
+					+ "correctamente el nuevo correo");
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido actualizando el email de [%s] a [%s]: %s", 
+			Log.debug("Algo ha ocurrido actualizando el email de [%s] a [%s]: "
+					+ "%s", 
 					user.getLogin(),nuevoEmail,b.getMessage());
 			resultado="FRACASO";
 		}

@@ -21,9 +21,9 @@
 				align="center">
 				<tr class="row">
 					<th class="col-*-*">ID</th>
-					<th class="col-*-*"><a href="ordenarUsuarios?id=login">LOGIN</a></th>
-					<th class="col-*-*"><a href="ordenarUsuarios?id=email">EMAIL</a></th>
-					<th class="col-*-*"><a href="ordenarUsuarios?id=status">STATUS</a></th>
+					<th class="col-*-*"><a href="ordenarUsuarios?value=login">LOGIN</a></th>
+					<th class="col-*-*"><a href="ordenarUsuarios?value=email">EMAIL</a></th>
+					<th class="col-*-*"><a href="ordenarUsuarios?value=status">STATUS</a></th>
 				</tr>
 				<c:forEach var="entry" items="${listaUsuarios}" varStatus="i">
 					<tr class="row" id="item_${i.index}">
@@ -46,7 +46,7 @@
 							</c:if>
 							<td class="col*-*"><a
 								href="eliminarUsuario?id=${entry.id}=${entry.login}"
-								onClick="return confirm('¿Eliminar al usuario: ${entry.id}?');">Delete</a></td>
+								onClick="return confirm('¿Eliminar al usuario: ${entry.id} - ${entry.login}?');">Delete</a></td>
 						</c:if>
 					</tr>
 				</c:forEach>

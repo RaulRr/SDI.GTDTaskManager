@@ -24,7 +24,8 @@ public class OrdenarUsuariosAction implements Accion {
 		String resultado="EXITO";
 		
 		List<User> listaUsuarios;
-		String comparador =  request.getQueryString().split("&")[0].split("=")[1];
+		String comparador =  request.getQueryString().split("&")[0].
+				split("=")[1];
 		
 		try {
 			AdminService adminService = Services.getAdminService();
@@ -37,14 +38,16 @@ public class OrdenarUsuariosAction implements Accion {
 					comparador);
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido ordenando usuarios por: %s",
+			Log.debug("Algo ha ocurrido ordenando usuarios por: [%s]",
 					comparador);
 			resultado="FRACASO";
 		}
 		return resultado;
 	}
 	
-	private void ordenarUsuarios(List<User> lista, String comparador) throws BusinessException{
+	private void ordenarUsuarios(List<User> lista, String comparador) 
+			throws BusinessException{
+		
 		switch(comparador){
 			case "login":
 				Collections.sort(lista, new Comparator<User>() {

@@ -44,13 +44,13 @@ public class AñadirTareaAction implements Accion {
 			if (category != null && category.equals("today"))
 				task.setPlanned(DateUtil.today());
 
-			taskService.createTask(task);// Service añadede la fecha de creacion
+			taskService.createTask(task);//Service añadede la fecha de creacion
 
-			Log.debug("El usuario %s ha creado una nueva tarea %s", 
+			Log.debug("El usuario [%s] ha creado una nueva tarea [%s]", 
 					user.getLogin(), nombre);
 		} catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido creando la nueva tarea del usuario %s",
-					user.getLogin());
+			Log.debug("Algo ha ocurrido creando la nueva tarea del usuario "
+					+ "[%s]", user.getLogin());
 			resultado = "FRACASO";
 		}
 		return resultado;
