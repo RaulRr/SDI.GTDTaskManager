@@ -25,16 +25,17 @@ public class AñadirTareaAction implements Accion {
 
 		String resultado = "EXITO";
 		String nombre = request.getParameter("nuevaTarea");
-		HttpSession sesion = request.getSession();
-		User user = (User) sesion.getAttribute("user");
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
 		String category = "";
 		Long categoryId = null;
 
 		Task task;
 
 		try {
-			category = (String) sesion.getAttribute("categoria");
-
+			category = (String) session.getAttribute("categoria");
+			session.removeAttribute("categoria");
+			
 			TaskService taskService = Services.getTaskService();
 			categoryId = findCategoryId(
 					taskService.findCategoriesByUserId(user.getId()), category);
@@ -45,9 +46,11 @@ public class AñadirTareaAction implements Accion {
 
 			taskService.createTask(task);// Service añadede la fecha de creacion
 
-			Log.debug("Se ha creado una nueva tarea [%s]", nombre);
+			Log.debug("El usuario %s ha creado una nueva tarea %s", 
+					user.getLogin(), nombre);
 		} catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido creando la nueva tarea del usuario");
+			Log.debug("Algo ha ocurrido creando la nueva tarea del usuario %s",
+					user.getLogin());
 			resultado = "FRACASO";
 		}
 		return resultado;
