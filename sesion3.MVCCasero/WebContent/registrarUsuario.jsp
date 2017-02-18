@@ -1,7 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="comprobarNavegacion.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <title>TaskManager - Registro de Usuario</title>
@@ -11,12 +11,9 @@
 </head>
 <body>
 	<div class="container">
-		<center>
 			<h3 align="center">Registrar nuevo Usuario</h3>
-		</center>
 		<form action="registrarUsuario" method="POST">
-			<table class="table table-striped table-condensed" style="width: 90%"
-				align="center">
+			<table class="table table-striped table-condensed" style="width: 90%">
 				<tr>
 					<th><i class="glyphicon glyphicon-user"></i> Login:</th>
 					<td id="login"><input type="text" name="login" placeholder="Login"></td>
@@ -42,10 +39,8 @@
 				</tr>
 			</table>
 		</form>
-		<center>
 			<a id="paginaAnterior_link_id" href="login.jsp"><span class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
 			<%@ include file="pieDePagina.jsp"%>
-		</center>
 	</div>
 </body>
 </html>

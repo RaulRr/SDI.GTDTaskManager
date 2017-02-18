@@ -1,7 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="comprobarNavegacion.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <title>TaskManager - Listado de tareas</title>
@@ -13,7 +13,7 @@
 	<script>
 function modificarCategoriaFunction(categoryId) {
 	
-	var nombre = document.getElementById("cat_" + categoryId).getAttribute("value");
+	var nombre = document.getElementById("cat_" + categoryId).childNodes[0].nodeValue;
 
 	var nuevoNombre = prompt("Indica el nuevo nombre:",
 		nombre);
@@ -23,15 +23,13 @@ function modificarCategoriaFunction(categoryId) {
     }
 }
 </script>
-	<center>
 		<%@ include file="pieDePagina.jsp"%>
-	</center>
 	<div class="container">
 		<h3 align="center">Tareas: ${categoria}</h3>
 		<div class="container">
 			<form action="añadirTarea" method="POST">
 				<table class="table table-bordered table-condensed"
-					style="width: 70%" align="center">
+					style="width: 70%" >
 					<tr>
 						<th>Nueva Tarea:</th>
 						<td id="nuevaTarea"><input type="text" name="nuevaTarea"
@@ -90,8 +88,7 @@ function modificarCategoriaFunction(categoryId) {
 					<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 						<tr class="row" id="item_${i.index}">
 							<td class="col-*-*"><a
-								href="listarTareas?category=${entry.id}" id="cat_${entry.id}"
-								value="${entry.name}">${entry.name}</a></td>
+								href="listarTareas?category=${entry.id}" id="cat_${entry.id}">${entry.name}</a></td>
 
 							<td class="col-*-*"><a
 								onclick="modificarCategoriaFunction(${entry.id})" href="#"><span
@@ -117,7 +114,7 @@ function modificarCategoriaFunction(categoryId) {
 			<div class="col-*-6">
 				<table
 					class="table table-striped table-condensed table-bordered table-hover"
-					align="center" style="width: 70%">
+					style="width: 70%; float: right;">
 					<tr class="row">
 						<th class="col-*-*">Title</th>
 						<th class="col-*-*">Comments</th>
@@ -169,7 +166,7 @@ function modificarCategoriaFunction(categoryId) {
 								</c:if></td>
 						</tr>
 						<c:if
-							test="${categoria.equals('today') && i.index < listaTareas.size() && !entry.categoryId.equals(listaTareas[i.index+1].categoryId)}">
+							test="${categoria.equals('today') && i.index < listaTareas.size() && !entry.categoryId.equals(listaTareas[i.index+1].categoryId) && entry.categoryId != null}">
 							<tr>
 								<th colspan="7" class="alert alert-info" style="height: 50px">
 								</th>
@@ -186,10 +183,8 @@ function modificarCategoriaFunction(categoryId) {
 				</table>
 			</div>
 		</div>
-		<center>
-			<a id="paginaAnterior_link_id" href="principalUsuario"><span
-				class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
-		</center>
+			<a id="paginaAnterior_link_id" href="principalUsuario">
+			<span class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
 	</div>
 </body>
 </html>
