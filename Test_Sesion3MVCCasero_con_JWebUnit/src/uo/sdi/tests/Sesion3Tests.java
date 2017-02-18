@@ -7,50 +7,34 @@ import org.junit.*;
 public class Sesion3Tests {
 
     private WebTester john;
-
+    private WebTester mary;
 
 	@Before
     public void prepare() {
     	john=new WebTester();
-    	john.setBaseUrl("http://localhost:8280/sesion3.MVCCasero");
+    	mary=new WebTester();
+    	john.setBaseUrl("http://localhost:8280/UO237253");
+    	mary.setBaseUrl("http://localhost:8280/UO237253");
     }
 
     @Test
-    public void testListarCategorias() {
+    public void testRegistrarUsuario() {
     	john.beginAt("/");  // Navegar a la URL
-    	john.assertLinkPresent("listarCategorias_link_id");  // Comprobar que existe el hipervínculo
-    	john.clickLink("listarCategorias_link_id"); // Seguir el hipervínculo
-
-    	john.assertTitleEquals("TaskManager - Listado de categorías");  // Comprobar título de la página
-
-        // La base de datos contiene 7 categorías tal y como se entrega
-        int i=0;
-        for (i=0;i<7;i++)
-        	john.assertElementPresent("item_"+i); // Comprobar elementos presentes en la página
-        john.assertElementNotPresent("item_"+i);
+    	john.assertLinkPresent("registrar_link_id");  // Comprobar que existe el hipervínculo
+    	john.clickLink("registrar_link_id"); // Seguir el hipervínculo
+    	
+    	john.assertTitleEquals("TaskManager - Registro de Usuario");  // Comprobar título de la página
+    	john.assertTextPresent("Login:"); //Comprobar Login en la pagina
+    	john.assertTextPresent("Email:"); //Comprobar Email en la pagina
+    	john.assertTextPresent("Contraseña:"); //Comprobar Contraseña en la pagina
+    	john.assertTextPresent("Repetir Contraseña:"); 
+    	
+    	john.setTextField("login", "john");
+    	john.setTextField("email", "john@gmail.com");
+    	john.setTextField("pass", "john123456");
+    	john.setTextField("rePass", "john123456");
+    	john.clickButton("registrar_button_id");
+    	
+    	john.assertTitleEquals("TaskManager - Inicie sesión");  // Comprobar título de la página
     }
-
-    @Test
-    public void testIniciarSesionConExito() {
-    	john.beginAt("/");  // Navegar a la URL
-    	john.assertFormPresent("validarse_form_name");  // Comprobar formulario está presente
-    	john.setTextField("nombreUsuario", "john"); // Rellenar primer campo de formulario
-    	john.submit(); // Enviar formulario
-    	john.assertTitleEquals("TaskManager - Página principal del usuario");  // Comprobar título de la página
-    	john.assertTextInElement("login", "john");  // Comprobar cierto elemento contiene cierto texto
-    	john.assertTextInElement("id", "2");  // Comprobar cierto elemento contiene cierto texto
-    	john.assertTextPresent("Iniciaste sesión el"); // Comprobar cierto texto está presente
-    }
-
-    
-    @Test
-    public void testIniciarSesionSinExito() {
-    	WebTester browser=new WebTester();
-    	browser.setBaseUrl("http://localhost:8280/sesion3.MVCCasero");        
-    	browser.beginAt("/");  // Navegar a la URL
-    	browser.setTextField("nombreUsuario", "yoNoExisto"); // Rellenar primer campo de formulario
-    	browser.submit(); // Enviar formulario
-    	browser.assertTitleEquals("TaskManager - Inicie sesión");  // Comprobar título de la página
-    }
-
 }

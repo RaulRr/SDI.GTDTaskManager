@@ -16,26 +16,26 @@
 			<table class="table table-striped table-condensed" style="width: 90%">
 				<tr>
 					<th><i class="glyphicon glyphicon-user"></i> Login:</th>
-					<td id="login"><input type="text" name="login" placeholder="Login"></td>
+					<td><input id ="login" type="text" name="login" placeholder="Login"></td>
 				</tr>
 				<tr>
 					<th><i class="glyphicon glyphicon-envelope"></i> Email:</th>
-					<td id="email"><input type="text" name="email" size="15"
+					<td><input id="email" type="text" name="email" size="15"
 						placeholder="email"></td>
 				</tr>
 				<tr>
 					<th><i class="glyphicon glyphicon-lock"></i> Contraseña:</th>
-					<td id="pass"><input type="text" name="pass"
+					<td><input id="pass" type="text" name="pass"
 						placeholder="Contraseña"></td>
 				</tr>
 				<tr>
 					<th><i class="glyphicon glyphicon-lock"></i> Repetir Contraseña:</th>
-					<td id="rePass"><input type="text" name="rePass"
+					<td><input id="rePass" type="text" name="rePass"
 						placeholder="Repite la contraseña"></td>
 				</tr>
 				<tr>
 					<td/>
-					<td><input type="submit" value="Registrarse"></td>
+					<td><input id="registrar_button_id" type="submit" value="Registrarse"></td>
 				</tr>
 			</table>
 		</form>
