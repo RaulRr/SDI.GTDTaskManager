@@ -26,6 +26,7 @@ import uo.sdi.acciones.user.CrearCategoriaAction;
 import uo.sdi.acciones.user.EditarTareaAction;
 import uo.sdi.acciones.user.EliminarCategoriaAction;
 import uo.sdi.acciones.user.ListarTareasAction;
+import uo.sdi.acciones.user.ModificarCategoriaAction;
 import uo.sdi.acciones.user.ModificarDatosAction;
 import uo.sdi.dto.User;
 import uo.sdi.persistence.PersistenceException;
@@ -150,6 +151,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("cerrarTarea", new CerrarTareaAction());
 		mapaRegistrado.put("nuevaCategoria", new CrearCategoriaAction());
 		mapaRegistrado.put("eliminarCategoria", new EliminarCategoriaAction());
+		mapaRegistrado.put("modificarCategoria", 
+				new ModificarCategoriaAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		Map<String,Accion> mapaAdmin=new HashMap<String,Accion>();
@@ -168,7 +171,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaDeNavegacion=new HashMap<String,Map<String, Map<String, String>>>();
 
 		// Crear mapas auxiliares vacíos
-		Map<String, Map<String, String>> opcionResultadoYJSP=new HashMap<String, Map<String, String>>();
+		Map<String, Map<String, String>> opcionResultadoYJSP=new HashMap<String, 
+				Map<String, String>>();
 		Map<String, String> resultadoYJSP=new HashMap<String, String>();
 
 		// Mapa de navegación de anónimo
@@ -250,6 +254,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO","/listarTareas");
 		resultadoYJSP.put("FRACASO","/login.jsp");
 		opcionResultadoYJSP.put("eliminarCategoria", resultadoYJSP);
+		
+		resultadoYJSP=new HashMap<String, String>();
+		resultadoYJSP.put("EXITO","/listarTareas");
+		resultadoYJSP.put("FRACASO","/listarTareas");
+		opcionResultadoYJSP.put("modificarCategoria", resultadoYJSP);
 		
 		mapaDeNavegacion.put("USUARIO",opcionResultadoYJSP);
 		
