@@ -24,7 +24,10 @@ public class EditarTareaAction implements Accion {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 
+		//Inicializamos el resultado
 		String resultado="EXITO";
+		
+		//
 		String title = request.getParameter("title");
 		String comment = request.getParameter("comment");
 		String category = request.getParameter("category");

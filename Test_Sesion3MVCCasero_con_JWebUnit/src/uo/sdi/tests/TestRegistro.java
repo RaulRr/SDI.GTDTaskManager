@@ -56,7 +56,7 @@ public class TestRegistro {
 		mary.setTextField("rePass", "john123456");
 		mary.clickButton("registrar_button_id");
 
-		mary.assertTitleEquals("TaskManager - Inicie sesión"); // Seguimos en el
+		mary.assertTitleEquals("TaskManager - Registro de Usuario"); // Seguimos en el
 																// registro
 		mary.assertTextPresent("Error");
 	}

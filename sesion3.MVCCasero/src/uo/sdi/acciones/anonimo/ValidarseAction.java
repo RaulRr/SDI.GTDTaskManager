@@ -53,22 +53,27 @@ public class ValidarseAction implements Accion {
 				// Si se obtiene correctamente y no es null, se comprueba que no
 				// esté ya
 				// conectado
-				if (userByLogin.equals(request.getServletContext()
-						.getAttribute("user"))) {
-
-					// Si el usuario ya está conectado en alguna sesión, se
-					// deniega el acceso, y se generan lso mensajes de Log e UI,
-					// y se cambia el resutlado a FRACASO
-					session.invalidate();
-					Log.info("El usuario [%s] ya está conectado", nombreUsuario);
-					request.setAttribute("mensajeParaElUsuario", "El usuario ["
-							+ nombreUsuario + "] ya está conectado");
-					resultado = "FRACASO";
+							Object user = request.getServletContext()
+								.getAttribute(userByLogin.getLogin());
+						if(user != null){
+						// Si el usuario ya está conectado en alguna sesión, se
+						// deniega el acceso, y se generan lso mensajes de Log e
+						// UI,
+						// y se cambia el resutlado a FRACASO
+						//session.invalidate();
+						Log.info("El usuario [%s] ya está conectado",
+								nombreUsuario);
+						request.setAttribute("mensajeParaElUsuario",
+								"El usuario [" + nombreUsuario
+										+ "] ya está conectado");
+						resultado = "FRACASO";
+					
 				} else {
-
-					// Si todo lo anterior está correcto, se añade el usuario a
+					// Si todo lo anterior está correcto, se añade el
+					// usuario a
 					// la sesión, se crean los mensajes de Log e UI
-					// correspondioentes, y se incrementa el contador de inicios
+					// correspondioentes, y se incrementa el contador de
+					// inicios
 					// de sesión
 					session.setAttribute("user", userByLogin);
 					int contador = Integer.parseInt((String) request
@@ -77,11 +82,12 @@ public class ValidarseAction implements Accion {
 							String.valueOf(contador + 1));
 					session.setAttribute("fechaInicioSesion",
 							new java.util.Date());
-					request.getServletContext().setAttribute("user",
-							userByLogin);
+					request.getServletContext().setAttribute(
+							userByLogin.getLogin(), "conectado");
 					Log.info("El usuario [%s] ha iniciado sesión",
 							nombreUsuario);
 				}
+
 			} else {
 
 				// Si no se obtiene Usuario, se crea el Log y mensaje de UI

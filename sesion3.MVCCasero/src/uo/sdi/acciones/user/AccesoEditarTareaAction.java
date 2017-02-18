@@ -35,7 +35,7 @@ public class AccesoEditarTareaAction implements Accion {
 		}
 
 		try {
-			if (taskId == null) {// se fallo al modificar. recargar pagina
+			if (taskId == null) {// Se fallo al modificar. Recargar pagina
 				taskId = (Long) session.getAttribute("editTarea");
 				request.setAttribute("mensajeParaElUsuario",
 						session.getAttribute("mensaje"));
@@ -56,6 +56,9 @@ public class AccesoEditarTareaAction implements Accion {
 					usuario.getLogin());
 
 		} catch (BusinessException b) {
+
+			// Si falla, se genera el mensaje de Log y se cambia el resultado a
+			// FRACASO
 			Log.debug(
 					"Algo ha ocurrido con el usuario [%s] tratando de acceder"
 							+ " al editor de tarea", usuario.getLogin());
@@ -64,10 +67,21 @@ public class AccesoEditarTareaAction implements Accion {
 		return resultado;
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param task
+	 */
 	private void datosTarea(HttpServletRequest request, Task task) {
+
+		// Añadimos el título de la tarea al request
 		request.setAttribute("titulo", task.getTitle());
+
+		// Si tiene comentarios, se añaden al request
 		if (task.getComments() != null)
 			request.setAttribute("comentarios", task.getComments());
+
+		// Si tiene fecha planeada, se añade al request
 		if (task.getPlanned() != null) {
 			// dd/MM/yyyy
 			String date = alb.util.date.DateUtil.toString(task.getPlanned());
@@ -77,6 +91,8 @@ public class AccesoEditarTareaAction implements Accion {
 					+ date.split("-")[0];
 			request.setAttribute("fecha", date);
 		}
+
+		// Si tiene categoría asignada, se añade al request
 		if (task.getCategoryId() != null)
 			request.setAttribute("categoria", task.getCategoryId());
 	}

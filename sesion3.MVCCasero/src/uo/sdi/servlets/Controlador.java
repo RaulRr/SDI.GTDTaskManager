@@ -163,6 +163,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaAdmin.put("ordenarUsuarios", new OrdenarUsuariosAction());
 		mapaAdmin.put("eliminarUsuario", new EliminarUsuarioAction());
 		mapaAdmin.put("principalUsuario", new VolverAtrasAction());
+		mapaAdmin.put("validarse", new ValidarseAction());
 		mapaDeAcciones.put("ADMIN", mapaAdmin);
 	}
 	

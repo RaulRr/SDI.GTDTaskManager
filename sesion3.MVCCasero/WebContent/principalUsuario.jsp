@@ -62,7 +62,7 @@
 		</c:if>
 		<br />
 		<center>
-			<a id="cerrarSesion_link_id" href="cerrarSesion"><span class="glyphicon glyphicon-off"></span> Cerrar sesión</a>
+			<a id="cerrarSesion_link_id" href="cerrarSesion?user=${user.login}"><span class="glyphicon glyphicon-off"></span> Cerrar sesión</a>
 			<%@ include file="pieDePagina.jsp"%>
 		</center>
 	</div>
