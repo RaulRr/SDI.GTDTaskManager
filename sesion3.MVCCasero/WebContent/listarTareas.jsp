@@ -35,7 +35,7 @@ function modificarCategoriaFunction(categoryId) {
 					<tr>
 						<th>Nueva Tarea:</th>
 						<td id="nuevaTarea"><input type="text" name="nuevaTarea"
-							value="nombre" style="width: 95%"></td>
+							placeholder="nombre" style="width: 95%"></td>
 						<td><input type="submit" value="NuevaTarea"
 							style="width: 100%"></td>
 						<c:if
@@ -105,7 +105,7 @@ function modificarCategoriaFunction(categoryId) {
 					<table class="table table-bordered table-condensed">
 						<tr class="row" id="item_Week">
 							<td class="col-*-*" id="nuevaCategoria"><input type="text"
-								name="nuevaCategoria" value="Categoría"></td>
+								name="nuevaCategoria" placeholder="Categoría"></td>
 							<td colspan="2"><input type="submit" value="Crear"></td>
 						</tr>
 					</table>

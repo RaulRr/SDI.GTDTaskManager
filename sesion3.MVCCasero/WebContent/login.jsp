@@ -17,12 +17,12 @@
 			<br>
 			<table align="center" class="table table-condensed" style="width: 50%">
 				<tr>
-					<td align="left"><span class="glyphicon glyphicon-user"></span> Su identificador de usuario:</td>
+					<th align="left"><span class="glyphicon glyphicon-user"></span> Su identificador de usuario:</th>
 					<td colspan="3"><input type="text" name="nombreUsuario" align="left"
 						size="15"></td>
 				</tr>
 				<tr>
-					<td align="left"><span class="glyphicon glyphicon-asterisk"></span> Su contraseña:</td>
+					<th align="left"><span class="glyphicon glyphicon-lock"></span> Su contraseña:</th>
 					<td colspan="3"><input type="password" name="passUsuario" align="left"
 						size="15"></td>
 				</tr>

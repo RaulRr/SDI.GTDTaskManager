@@ -18,23 +18,23 @@
 			<table class="table table-striped table-condensed" style="width: 90%"
 				align="center">
 				<tr>
-					<th>Login:</th>
-					<td id="login"><input type="text" name="login" value="Login"></td>
+					<th><i class="glyphicon glyphicon-user"></i> Login:</th>
+					<td id="login"><input type="text" name="login" placeholder="Login"></td>
 				</tr>
 				<tr>
-					<th>Email:</th>
+					<th><i class="glyphicon glyphicon-envelope"></i> Email:</th>
 					<td id="email"><input type="text" name="email" size="15"
-						value="email"></td>
+						placeholder="email"></td>
 				</tr>
 				<tr>
-					<th>Contraseña:</th>
+					<th><i class="glyphicon glyphicon-lock"></i> Contraseña:</th>
 					<td id="pass"><input type="text" name="pass"
-						value="Contraseña"></td>
+						placeholder="Contraseña"></td>
 				</tr>
 				<tr>
-					<th>Repetir Contraseña:</th>
+					<th><i class="glyphicon glyphicon-lock"></i> Repetir Contraseña:</th>
 					<td id="rePass"><input type="text" name="rePass"
-						value="Repite la contraseña"></td>
+						placeholder="Repite la contraseña"></td>
 				</tr>
 				<tr>
 					<td/>
