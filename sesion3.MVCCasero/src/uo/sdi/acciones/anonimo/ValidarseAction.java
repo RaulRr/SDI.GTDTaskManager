@@ -35,13 +35,24 @@ public class ValidarseAction implements Accion {
 				resultado="FRACASO";
 			}
 			if (userByLogin!=null) {
+				if(userByLogin.equals(request.getServletContext().getAttribute("user"))){
+					session.invalidate();
+					Log.info("El usuario [%s] ya está conectado",nombreUsuario);
+					request.setAttribute("mensajeParaElUsuario", "El usuario ["+
+							nombreUsuario+"] ya está conectado");
+					resultado="FRACASO";
+				}
+				else{
 				session.setAttribute("user", userByLogin);
 				int contador=Integer.parseInt((String)request.getServletContext()
 						.getAttribute("contador"));
 				request.getServletContext().setAttribute("contador", 
 						String.valueOf(contador+1));
 				session.setAttribute("fechaInicioSesion", new java.util.Date());
+				request.getServletContext().setAttribute("user", 
+						userByLogin);
 				Log.info("El usuario [%s] ha iniciado sesión",nombreUsuario);
+				}
 			}
 			else {
 				session.invalidate();

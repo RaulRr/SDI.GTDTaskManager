@@ -153,6 +153,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("eliminarCategoria", new EliminarCategoriaAction());
 		mapaRegistrado.put("modificarCategoria", 
 				new ModificarCategoriaAction());
+		mapaRegistrado.put("validarse", new ValidarseAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		Map<String,Accion> mapaAdmin=new HashMap<String,Accion>();
