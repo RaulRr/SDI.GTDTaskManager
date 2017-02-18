@@ -29,14 +29,17 @@
 							test="${filtro.equals('no') && !categoria.equals('inbox') && !categoria.equals('week') 
 							&& !categoria.equals('today') && categoria != null}">
 							<td><a href="listarTareas?category=${categoria}&filtro=si">
-							<span class="glyphicon glyphicon-chevron-down"></span> Mostrar
-									terminadas</a></td>
+									<span class="glyphicon glyphicon-chevron-down"></span> Mostrar
+									terminadas
+							</a></td>
 						</c:if>
 						<c:if
 							test="${filtro.equals('si') && !categoria.equals('inbox') && 
 						!categoria.equals('week') && !categoria.equals('today') && categoria != null}">
 							<td><a href="listarTareas?category=${categoria}&filtro=no">
-							 <span class="glyphicon glyphicon-chevron-up"></span> Ocultar terminadas</a></td>
+									<span class="glyphicon glyphicon-chevron-up"></span> Ocultar
+									terminadas
+							</a></td>
 						</c:if>
 					</tr>
 				</table>
@@ -75,9 +78,12 @@
 						<tr class="row" id="item_${i.index}">
 							<td class="col-*-*"><a
 								href="listarTareas?category=${entry.id}">${entry.name}</a></td>
-							<td class="col-*-*"><a href="modificarCategoria/${entry.id}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-							<td class="col-*-*"><a href="eliminarCategoria?id=${entry.id}=${entry.name}"
-								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');"><span class="glyphicon glyphicon-trash"></span></a></td>
+							<td class="col-*-*"><a href="modificarCategoria/${entry.id}"><span
+									class="glyphicon glyphicon-pencil"></span></a></td>
+							<td class="col-*-*"><a
+								href="eliminarCategoria?id=${entry.id}=${entry.name}"
+								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -109,23 +115,41 @@
 							<td class="col-*-*">${entry.title}(<c:if
 									test="${entry.finished == null}">
 									<a id="editarTarea${entry.title}"
-										href="editarTarea?id=${entry.id}">
-										<span class="glyphicon glyphicon-pencil"></span> Edit</a>
+										href="editarTarea?id=${entry.id}"> <span
+										class="glyphicon glyphicon-pencil"></span> Edit
+									</a>
 								</c:if>)
 							</td>
 							<td class="col-*-*">${entry.comments}</td>
-							<td class="col-*-*">${entry.categoryId}</td>
-							<td class="col-*-*">${entry.created}</td>
-							<c:if test="${entry.planned < date}">
-								<td class="col-*-*"><div
-										class="alert alert-danger alert-dismissable">${entry.planned}
+							<c:if test="${entry.planned < date && categoria.equals('week')}">
+								<td class="col-*-*"><div class="alert alert-danger">
+										<c:forEach var="cat" items="${listaCategorias}">
+											<c:if test="${cat.id == entry.categoryId }">
+												${cat.name}
+											</c:if>
+										</c:forEach>
 									</div></td>
 							</c:if>
-							<c:if test="${entry.planned >= date || entry.planned == null}">
+							<c:if test="${!categoria.equals('week')}">
+								<td class="col-*-*"><c:forEach var="cat"
+										items="${listaCategorias}">
+										<c:if test="${cat.id == entry.categoryId }">
+											${cat.name}
+									</c:if>
+									</c:forEach></td>
+							</c:if>
+							<td class="col-*-*">${entry.created}</td>
+							<c:if test="${entry.planned < date && !categoria.equals('week')}">
+								<td class="col-*-*"><div class="alert alert-danger">${entry.planned}
+									</div></td>
+							</c:if>
+							<c:if
+								test="${entry.planned >= date || entry.planned == null || categoria.equals('week')}">
 								<td class="col-*-*">${entry.planned}</td>
 							</c:if>
 							<td class="col-*-*"><c:if test="${entry.finished == null}">
-									<a href="cerrarTarea?=${entry.id}"><span class="glyphicon glyphicon-ok"></span> Finish</a>
+									<a href="cerrarTarea?=${entry.id}"><span
+										class="glyphicon glyphicon-ok"></span> Finish</a>
 								</c:if></td>
 						</tr>
 						<c:if
@@ -147,7 +171,8 @@
 			</div>
 		</div>
 		<center>
-			<a id="paginaAnterior_link_id" href="principalUsuario"><span class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
+			<a id="paginaAnterior_link_id" href="principalUsuario"><span
+				class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
 		</center>
 	</div>
 </body>

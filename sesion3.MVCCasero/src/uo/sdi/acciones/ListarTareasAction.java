@@ -131,7 +131,6 @@ public class ListarTareasAction implements Accion {
 					usuario.getId());
 			request.setAttribute("listaCategorias", listaCategorias);
 			request.setAttribute("separador", "");
-
 			Log.debug(
 					"Obtenida lista de categorías conteniendo [%d] categorías",
 					listaCategorias.size());
