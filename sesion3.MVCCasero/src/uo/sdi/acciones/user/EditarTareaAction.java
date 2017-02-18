@@ -45,14 +45,13 @@ public class EditarTareaAction implements Accion {
 		}
 		
 		try{//si se selecciono fecha y cual
-			if(date != null)
+			if(!date.equals(""))
 				realDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
 			
 		}catch(Exception e){
 			realDate = null;
 			resultado="FRACASO";
-			request.setAttribute("mensajeParaElUsuario",
-					"Formato de fecha incorrecto");
+			session.setAttribute("mensaje", "Formato de fecha incorrecto");
 			return resultado;
 		}
 

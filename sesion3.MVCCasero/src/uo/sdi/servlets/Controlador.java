@@ -231,7 +231,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/listarTareas?category=editada");
-		resultadoYJSP.put("FRACASO","/editarTarea.jsp");
+		resultadoYJSP.put("FRACASO","/editarTarea");
 		opcionResultadoYJSP.put("modificarTarea", resultadoYJSP);
 		
 		

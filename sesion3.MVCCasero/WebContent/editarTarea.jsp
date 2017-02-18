@@ -25,7 +25,7 @@
 				</tr>
 				<tr>
 					<th>New Planned Date:</th>
-					<td><input type="date" name="date" value="${fecha}">Old
+					<td><input type="date" name="date" value="${fecha}" placeHolder="yyyy-MM-dd"> Old
 						Plannded Date: ${fecha}</td>
 				</tr>
 				<tr>
