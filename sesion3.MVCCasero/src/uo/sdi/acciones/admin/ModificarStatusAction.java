@@ -1,4 +1,4 @@
-package uo.sdi.acciones;
+package uo.sdi.acciones.admin;
 
 import java.util.List;
 
@@ -23,7 +23,8 @@ public class ModificarStatusAction implements Accion {
 		
 		String resultado="EXITO";
 		
-		Long userId =  Long.parseLong(request.getQueryString().split("&")[0].split("=")[1]);
+		Long userId =  Long.parseLong(request.getQueryString().split("&")[0].
+				split("=")[1]);
 		String login = request.getQueryString().split("&")[0].split("=")[2];
 		UserStatus estado;
 		List<User> listaUsuarios;
@@ -47,8 +48,8 @@ public class ModificarStatusAction implements Accion {
 						
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido actualizando el status del usuario [%s]", 
-					userId);
+			Log.debug("Algo ha ocurrido actualizando el status del usuario "
+					+ "[%s] - [%s]", userId);
 			resultado="FRACASO";
 		}
 		return resultado;

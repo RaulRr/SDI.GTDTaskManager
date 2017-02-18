@@ -1,4 +1,4 @@
-package uo.sdi.acciones;
+package uo.sdi.acciones.admin;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import uo.sdi.acciones.Accion;
 import uo.sdi.business.AdminService;
 import uo.sdi.business.Services;
 import uo.sdi.business.exception.BusinessException;
@@ -23,7 +24,8 @@ public class OrdenarUsuariosAction implements Accion {
 		String resultado="EXITO";
 		
 		List<User> listaUsuarios;
-		String comparador =  request.getQueryString().split("&")[0].split("=")[1];
+		String comparador =  request.getQueryString().split("&")[0].
+				split("=")[1];
 		
 		try {
 			AdminService adminService = Services.getAdminService();
@@ -36,14 +38,16 @@ public class OrdenarUsuariosAction implements Accion {
 					comparador);
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido ordenando usuarios por: %s",
+			Log.debug("Algo ha ocurrido ordenando usuarios por: [%s]",
 					comparador);
 			resultado="FRACASO";
 		}
 		return resultado;
 	}
 	
-	private void ordenarUsuarios(List<User> lista, String comparador) throws BusinessException{
+	private void ordenarUsuarios(List<User> lista, String comparador) 
+			throws BusinessException{
+		
 		switch(comparador){
 			case "login":
 				Collections.sort(lista, new Comparator<User>() {

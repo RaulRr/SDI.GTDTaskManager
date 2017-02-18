@@ -1,4 +1,4 @@
-package uo.sdi.acciones;
+package uo.sdi.acciones.admin;
 
 import java.util.List;
 
@@ -21,7 +21,8 @@ public class EliminarUsuarioAction implements Accion {
 		
 		String resultado="EXITO";
 		
-		Long userId =  Long.parseLong(request.getQueryString().split("&")[0].split("=")[1]);
+		Long userId =  Long.parseLong(request.getQueryString().split("&")[0].
+				split("=")[1]);
 		String login = request.getQueryString().split("&")[0].split("=")[2];
 		List<User> listaUsuarios;
 		
@@ -33,13 +34,13 @@ public class EliminarUsuarioAction implements Accion {
 			
 			listaUsuarios=adminService.findAllUsers();
 			request.setAttribute("listaUsuarios", listaUsuarios);
-			request.setAttribute("mensajeVerde", "Usuario eliminado correctamente");
-			
-			
+			request.setAttribute("mensajeVerde", "Usuario eliminado "
+					+ "correctamente");			
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido eliminado al usuario de id [%s]", 
-					userId);
+			Log.debug("Algo ha ocurrido eliminado al usuario: [%s] - [%s]", 
+					userId, login);
+			
 			resultado="FRACASO";
 		}
 		return resultado;

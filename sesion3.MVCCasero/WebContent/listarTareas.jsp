@@ -10,6 +10,19 @@
 	rel="stylesheet">
 </head>
 <body>
+<script>
+function modificarCategoriaFunction(categoryId) {
+	
+	var nombre = document.getElementById("cat_" + categoryId).getAttribute("value");
+
+	var nuevoNombre = prompt("Indica el nuevo nombre:",
+		nombre);
+	
+    if (nuevoNombre != null) {
+    	 location.replace("modificarCategoria?id="+categoryId+"="+nuevoNombre);
+    }
+}
+</script>
 	<center>
 		<%@ include file="pieDePagina.jsp"%>
 	</center>
@@ -77,12 +90,13 @@
 					<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 						<tr class="row" id="item_${i.index}">
 							<td class="col-*-*"><a
-								href="listarTareas?category=${entry.id}">${entry.name}</a></td>
-							<td class="col-*-*"><a href="modificarCategoria/${entry.id}"><span
-									class="glyphicon glyphicon-pencil"></span></a></td>
-							<td class="col-*-*"><a
+								href="listarTareas?category=${entry.id}" id="cat_${entry.id}" value="${entry.name}">${entry.name}</a></td>
+
+							<td class="col-*-*"><a onclick="modificarCategoriaFunction(${entry.id})" 
+								href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
+							<td class="col-*-*"><a 
 								href="eliminarCategoria?id=${entry.id}=${entry.name}"
-								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');"><span
+								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');"><span 
 									class="glyphicon glyphicon-trash"></span></a></td>
 						</tr>
 					</c:forEach>
