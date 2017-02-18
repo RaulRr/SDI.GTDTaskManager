@@ -45,10 +45,15 @@ public class EditarTareaAction implements Accion {
 		}
 		
 		try{//si se selecciono fecha y cual
-			realDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+			if(date != null)
+				realDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
 			
 		}catch(Exception e){
 			realDate = null;
+			resultado="FRACASO";
+			request.setAttribute("mensajeParaElUsuario",
+					"Formato de fecha incorrecto");
+			return resultado;
 		}
 
 		try {
@@ -62,6 +67,8 @@ public class EditarTareaAction implements Accion {
 			session.removeAttribute("editTarea"); 
 			Log.debug("El usuario [%s] ha modificado con exito la tarea [%s]", 
 					user.getLogin(), title);
+			request.setAttribute("mensajeVerde",
+					"Tarea modificada correctamente");
 		}
 		catch (BusinessException b) {
 			Log.debug("El usuario [%s] ha fallado al tratar de editar la tarea"

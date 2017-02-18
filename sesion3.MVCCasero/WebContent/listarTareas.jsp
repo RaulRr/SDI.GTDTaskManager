@@ -10,7 +10,7 @@
 	rel="stylesheet">
 </head>
 <body>
-<script>
+	<script>
 function modificarCategoriaFunction(categoryId) {
 	
 	var nombre = document.getElementById("cat_" + categoryId).getAttribute("value");
@@ -90,13 +90,15 @@ function modificarCategoriaFunction(categoryId) {
 					<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 						<tr class="row" id="item_${i.index}">
 							<td class="col-*-*"><a
-								href="listarTareas?category=${entry.id}" id="cat_${entry.id}" value="${entry.name}">${entry.name}</a></td>
+								href="listarTareas?category=${entry.id}" id="cat_${entry.id}"
+								value="${entry.name}">${entry.name}</a></td>
 
-							<td class="col-*-*"><a onclick="modificarCategoriaFunction(${entry.id})" 
-								href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
-							<td class="col-*-*"><a 
+							<td class="col-*-*"><a
+								onclick="modificarCategoriaFunction(${entry.id})" href="#"><span
+									class="glyphicon glyphicon-pencil"></span></a></td>
+							<td class="col-*-*"><a
 								href="eliminarCategoria?id=${entry.id}=${entry.name}"
-								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');"><span 
+								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');"><span
 									class="glyphicon glyphicon-trash"></span></a></td>
 						</tr>
 					</c:forEach>
@@ -139,7 +141,7 @@ function modificarCategoriaFunction(categoryId) {
 								<td class="col-*-*"><div class="alert alert-danger">
 										<c:forEach var="cat" items="${listaCategorias}">
 											<c:if test="${cat.id == entry.categoryId }">
-												${cat.name}
+												<a href="listarTareas?category=${entry.categoryId}">${cat.name}</a>
 											</c:if>
 										</c:forEach>
 									</div></td>
@@ -148,8 +150,8 @@ function modificarCategoriaFunction(categoryId) {
 								<td class="col-*-*"><c:forEach var="cat"
 										items="${listaCategorias}">
 										<c:if test="${cat.id == entry.categoryId }">
-											${cat.name}
-									</c:if>
+											<a href="listarTareas?category=${entry.categoryId}">${cat.name}</a>
+										</c:if>
 									</c:forEach></td>
 							</c:if>
 							<td class="col-*-*">${entry.created}</td>
