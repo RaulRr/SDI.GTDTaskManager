@@ -16,69 +16,105 @@ public class ValidarseAction implements Accion {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		
-		String resultado="EXITO";
-		String nombreUsuario=request.getParameter("nombreUsuario");
-		String passUsuario=request.getParameter("passUsuario");
-		HttpSession session=request.getSession();
-		if (session.getAttribute("user")==null) {
+		// inicializamos el resultado
+		String resultado = "EXITO";
+
+		// Obtenemos el nombre del usuario y la contraseña del request
+		String nombreUsuario = request.getParameter("nombreUsuario");
+		String passUsuario = request.getParameter("passUsuario");
+
+		// Obtenemos la sesión, para realizar las comprobacioens de usuarios en
+		// sesion
+		HttpSession session = request.getSession();
+
+		// Comprobamos si no hay usuarios actualmente conectados
+		if (session.getAttribute("user") == null) {
+
 			UserService userService = Services.getUserService();
-			User userByLogin=null;
+			User userByLogin = null;
+
+			// Intentamos obtener el usuario que desea iniciar sesión
 			try {
-				userByLogin = userService.findLoggableUser(nombreUsuario, 
+				userByLogin = userService.findLoggableUser(nombreUsuario,
 						passUsuario);
+				// En caso erroneo, se crea el Log, el mensaje para la UI, y se
+				// cambia el resutlado a FRACASO
 			} catch (BusinessException b) {
 				session.invalidate();
-				Log.debug("Algo ha ocurrido intentando iniciar sesión [%s]: %s", 
-						nombreUsuario,b.getMessage());
+				Log.debug(
+						"Algo ha ocurrido intentando iniciar sesión [%s]: %s",
+						nombreUsuario, b.getMessage());
 				request.setAttribute("mensajeParaElUsuario", b.getMessage());
-				resultado="FRACASO";
+				resultado = "FRACASO";
 			}
-			if (userByLogin!=null) {
-				if(userByLogin.equals(request.getServletContext().getAttribute("user"))){
+
+			if (userByLogin != null) {
+
+				// Si se obtiene correctamente y no es null, se comprueba que no
+				// esté ya
+				// conectado
+				if (userByLogin.equals(request.getServletContext()
+						.getAttribute("user"))) {
+
+					// Si el usuario ya está conectado en alguna sesión, se
+					// deniega el acceso, y se generan lso mensajes de Log e UI,
+					// y se cambia el resutlado a FRACASO
 					session.invalidate();
-					Log.info("El usuario [%s] ya está conectado",nombreUsuario);
-					request.setAttribute("mensajeParaElUsuario", "El usuario ["+
-							nombreUsuario+"] ya está conectado");
-					resultado="FRACASO";
+					Log.info("El usuario [%s] ya está conectado", nombreUsuario);
+					request.setAttribute("mensajeParaElUsuario", "El usuario ["
+							+ nombreUsuario + "] ya está conectado");
+					resultado = "FRACASO";
+				} else {
+
+					// Si todo lo anterior está correcto, se añade el usuario a
+					// la sesión, se crean los mensajes de Log e UI
+					// correspondioentes, y se incrementa el contador de inicios
+					// de sesión
+					session.setAttribute("user", userByLogin);
+					int contador = Integer.parseInt((String) request
+							.getServletContext().getAttribute("contador"));
+					request.getServletContext().setAttribute("contador",
+							String.valueOf(contador + 1));
+					session.setAttribute("fechaInicioSesion",
+							new java.util.Date());
+					request.getServletContext().setAttribute("user",
+							userByLogin);
+					Log.info("El usuario [%s] ha iniciado sesión",
+							nombreUsuario);
 				}
-				else{
-				session.setAttribute("user", userByLogin);
-				int contador=Integer.parseInt((String)request.getServletContext()
-						.getAttribute("contador"));
-				request.getServletContext().setAttribute("contador", 
-						String.valueOf(contador+1));
-				session.setAttribute("fechaInicioSesion", new java.util.Date());
-				request.getServletContext().setAttribute("user", 
-						userByLogin);
-				Log.info("El usuario [%s] ha iniciado sesión",nombreUsuario);
-				}
-			}
-			else {
+			} else {
+
+				// Si no se obtiene Usuario, se crea el Log y mensaje de UI
+				// sobre la falta del usuario, y se cambia el resutladoa FRACASO
 				session.invalidate();
-				Log.info("El usuario [%s] no está registrado",nombreUsuario);
-				request.setAttribute("mensajeParaElUsuario", "El usuario ["+
-						nombreUsuario+"] no está registrado");
-				resultado="FRACASO";
+				Log.info("El usuario [%s] no está registrado", nombreUsuario);
+				request.setAttribute("mensajeParaElUsuario", "El usuario ["
+						+ nombreUsuario + "] no está registrado");
+				resultado = "FRACASO";
 			}
+
+		} else if (!nombreUsuario.equals(session.getAttribute("user"))) {
+
+			// Si hay un usuario ya conectado, se avisa, gfenerando el mensaje
+			// de Log y el de UI, y cambiando el resultado a FRACASO
+			Log.info(
+					"Se ha intentado iniciar sesión como [%s] teniendo la sesión iniciada como [%s]",
+					nombreUsuario,
+					((User) session.getAttribute("user")).getLogin());
+			request.setAttribute("mensajeParaElUsuario",
+					"Se ha intentado iniciar sesión como [" + nombreUsuario
+							+ "] teniendo la sesión iniciada como ["
+							+ ((User) session.getAttribute("user")).getLogin()
+							+ "]");
+			session.invalidate();
+			resultado = "FRACASO";
 		}
-		else
-			if (!nombreUsuario.equals(session.getAttribute("user"))) {
-				Log.info("Se ha intentado iniciar sesión como [%s] teniendo la sesión iniciada como [%s]",
-						nombreUsuario,((User)session.getAttribute("user")).getLogin());
-				request.setAttribute("mensajeParaElUsuario", 
-						"Se ha intentado iniciar sesión como ["+nombreUsuario+
-						"] teniendo la sesión iniciada como ["+
-						((User)session.getAttribute("user")).getLogin()+"]");
-				session.invalidate();
-				resultado="FRACASO";
-			}
 		return resultado;
 	}
-	
+
 	@Override
 	public String toString() {
 		return getClass().getName();
 	}
-	
+
 }

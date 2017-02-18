@@ -11,8 +11,11 @@ public class AccesoRegistrarUsuarioAction implements Accion {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 
+		// Esta clase no hace nada, es solamente un puente para el acceso a la
+		// página de registro de usuario.
+
 		String resultado = "EXITO";
-		
+
 		return resultado;
 	}
 
