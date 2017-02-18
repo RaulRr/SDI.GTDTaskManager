@@ -53,21 +53,19 @@ public class ValidarseAction implements Accion {
 				// Si se obtiene correctamente y no es null, se comprueba que no
 				// esté ya
 				// conectado
-							Object user = request.getServletContext()
-								.getAttribute(userByLogin.getLogin());
-						if(user != null){
-						// Si el usuario ya está conectado en alguna sesión, se
-						// deniega el acceso, y se generan lso mensajes de Log e
-						// UI,
-						// y se cambia el resutlado a FRACASO
-						//session.invalidate();
-						Log.info("El usuario [%s] ya está conectado",
-								nombreUsuario);
-						request.setAttribute("mensajeParaElUsuario",
-								"El usuario [" + nombreUsuario
-										+ "] ya está conectado");
-						resultado = "FRACASO";
-					
+				Object user = request.getServletContext().getAttribute(
+						userByLogin.getLogin());
+				if (user != null) {
+					// Si el usuario ya está conectado en alguna sesión, se
+					// deniega el acceso, y se generan lso mensajes de Log e
+					// UI,
+					// y se cambia el resutlado a FRACASO
+					session.invalidate();
+					Log.info("El usuario [%s] ya está conectado", nombreUsuario);
+					request.setAttribute("mensajeParaElUsuario", "El usuario ["
+							+ nombreUsuario + "] ya está conectado");
+					resultado = "FRACASO";
+
 				} else {
 					// Si todo lo anterior está correcto, se añade el
 					// usuario a
@@ -99,9 +97,10 @@ public class ValidarseAction implements Accion {
 				resultado = "FRACASO";
 			}
 
-		} else if (!nombreUsuario.equals(session.getAttribute("user"))) {
+		} else if (!nombreUsuario.equals(((User) session.getAttribute("user"))
+				.getLogin())) {
 
-			// Si hay un usuario ya conectado, se avisa, gfenerando el mensaje
+			// Si hay un usuario ya conectado, se avisa, generando el mensaje
 			// de Log y el de UI, y cambiando el resultado a FRACASO
 			Log.info(
 					"Se ha intentado iniciar sesión como [%s] teniendo la sesión iniciada como [%s]",
@@ -112,7 +111,6 @@ public class ValidarseAction implements Accion {
 							+ "] teniendo la sesión iniciada como ["
 							+ ((User) session.getAttribute("user")).getLogin()
 							+ "]");
-			session.invalidate();
 			resultado = "FRACASO";
 		}
 		return resultado;
