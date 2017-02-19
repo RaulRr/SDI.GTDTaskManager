@@ -18,7 +18,7 @@ public class TestCategorias {
 	 * Probamos la creacion de categorias desde el listarTareas
 	 */
 	@Test
-	public void testCategoryCreation() {
+	public void categoriaCreacionTest() {
 		categoria.beginAt("/"); // Navegar a la URL
 		categoria.setTextField("nombreUsuario", "usuario3");
 		categoria.setTextField("passUsuario", "usuario3");
@@ -36,7 +36,7 @@ public class TestCategorias {
 		categoria.setTextField("nuevaCategoria_text_id", "NewCategory");
 		categoria.clickButton("nuevaCategoria_button_id");
 
-		// Existe
+		// Podemos elminar o moficar el nombre de categoria
 		categoria.assertTextPresent("NewCategory");
 		categoria.assertLinkPresent("modificarCategoria_link_idNewCategory");
 		categoria.assertLinkPresent("deleteCategoria_link_idNewCategory");

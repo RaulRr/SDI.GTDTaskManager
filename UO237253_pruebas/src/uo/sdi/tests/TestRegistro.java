@@ -21,7 +21,7 @@ public class TestRegistro {
 	 * Registrar un usuario satisfactoriamente
 	 */
 	@Test
-	public void testRegistrarUsuario() {
+	public void registroUsuarioTest() {
 		john.beginAt("/"); // Navegar a la URL
 		john.assertLinkPresent("registrar_link_id"); // Comprobar que existe
 		john.clickLink("registrar_link_id"); // Seguir el hipervínculo
@@ -49,7 +49,7 @@ public class TestRegistro {
 	 * No hay login
 	 */
 	@Test
-	public void testRegistrarUsuarioNullLogin() {
+	public void registroNullLogin() {
 		mary.beginAt("/"); // Navegar a la URL
 		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
 
@@ -68,7 +68,7 @@ public class TestRegistro {
 	 * Ya existe un usario con el login "usuario3"
 	 */
 	@Test
-	public void testRegistrarUsuarioExistingLogin() {
+	public void registroLoginExistenteTest() {
 		mary.beginAt("/"); // Navegar a la URL
 		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
 
@@ -87,7 +87,7 @@ public class TestRegistro {
 	 * Comprobamos error con email no válido
 	 */
 	@Test
-	public void testRegistrarUsuarioFailEmail() {
+	public void registroFailEmailTest() {
 		mary.beginAt("/"); // Navegar a la URL
 		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
 
@@ -106,7 +106,7 @@ public class TestRegistro {
 	 * Comprobamos error con passwords distintas
 	 */
 	@Test
-	public void testRegistrarUsuarioDifferentPasswords() {
+	public void registroDifferentPasswordsTest() {
 		mary.beginAt("/"); // Navegar a la URL
 		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
 
@@ -125,7 +125,7 @@ public class TestRegistro {
 	 * Comprobamos error con password no valida
 	 */
 	@Test
-	public void testRegistrarUsuarioInvalidPasswords() {
+	public void registroInvalidPasswordTest() {
 		mary.beginAt("/"); // Navegar a la URL
 		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
 

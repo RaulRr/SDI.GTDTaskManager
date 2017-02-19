@@ -20,7 +20,7 @@ public class TestAdmin {
 	 *usuarios volver y cerrar sesion 
 	 */
 	@Test
-	public void testValidacionAdmin() {
+	public void adminvalidacionTest() {
 		admin.beginAt("/"); // Navegar a la URL
 		admin.assertButtonPresent("validar_button_id"); //El boton de validarse
 		admin.setTextField("nombreUsuario", "administrador1");
@@ -46,7 +46,7 @@ public class TestAdmin {
 	 * Comprobamos que existen y funcionan los enlaces de ordenacion
 	 */
 	@Test
-	public void testAdminOrdenarListaUsuarios(){
+	public void adminListaUsuariosTest(){
 		admin.beginAt("/"); // Navegar a la URL
 		admin.setTextField("nombreUsuario", "administrador1");
 		admin.setTextField("passUsuario", "administrador1");
@@ -71,7 +71,7 @@ public class TestAdmin {
 	 * Comprobamos que podemos modificar el estado de un usuario
 	 */
 	@Test
-	public void testAdminChangeStatusUser(){
+	public void adminCambiarEstadoTest(){
 		admin.beginAt("/"); // Navegar a la URL
 		admin.setTextField("nombreUsuario", "administrador1");
 		admin.setTextField("passUsuario", "administrador1");
@@ -95,7 +95,7 @@ public class TestAdmin {
 	 * Comprobamos que podemos eliminar a cualquier usuario
 	 */
 	@Test
-	public void testAdminChangeDeleteUser(){
+	public void adminEliminarUsuarioTest(){
 		admin.beginAt("/"); // Navegar a la URL
 		admin.setTextField("nombreUsuario", "administrador1");
 		admin.setTextField("passUsuario", "administrador1");

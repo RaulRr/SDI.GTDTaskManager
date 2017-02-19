@@ -30,7 +30,7 @@ public class TestTareas {
 	 *encuentra disponibles
 	 */
 	@Test
-	public void testNavegationUser() {
+	public void tareaNavigationTest() {
 		
 		//Estamos en principal_usuario
 		task.assertTitleEquals("TaskManager - Página principal del usuario");
@@ -54,7 +54,7 @@ public class TestTareas {
 	 * Probamos a crear y finalizar una tarea válida
 	 */
 	@Test
-	public void testTaskCreation() {
+	public void tareaTaskCreation() {
 		
 		//Estamos en principal_usuario
 		task.assertTitleEquals("TaskManager - Página principal del usuario");
@@ -75,10 +75,28 @@ public class TestTareas {
 	}
 	
 	/**
-	 * Probamos a editar una tarea con su titulo
+	 * Probamos a crear una tarea sin nombre
 	 */
 	@Test
-	public void testTaskEditor() {
+	public void tareaTaskNullTitleCreation() {
+		
+		//Estamos en principal_usuario
+		task.assertTitleEquals("TaskManager - Página principal del usuario");
+		task.clickLink("listarTareas_link_id");//Accedemos
+		
+		task.setTextField("nuevaTarea","");
+		task.clickButton("nuevaTarea_button_id");
+		
+		//Comprobamos que la tarea no existe y seguimos en el listado
+		task.assertTitleEquals("TaskManager - Listado de tareas");
+		task.assertTextNotPresent("Tarea añadida");
+	}
+	
+	/**
+	 * Probamos a editar el titulo de una tarea
+	 */
+	@Test
+	public void tareaTaskEditor() {
 		
 		//Estamos en principal_usuario
 		task.assertTitleEquals("TaskManager - Página principal del usuario");
