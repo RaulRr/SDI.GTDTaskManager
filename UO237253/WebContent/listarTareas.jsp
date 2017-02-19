@@ -13,7 +13,7 @@
 	<script>
 function modificarCategoriaFunction(categoryId) {
 	
-	var nombre = document.getElementById("cat_" + categoryId).childNodes[0].nodeValue;
+	var nombre = document.getElementById("nombreCategoria_link_id" + categoryId).childNodes[0].nodeValue;
 
 	var nuevoNombre = prompt("Indica el nuevo nombre:",
 		nombre);
@@ -88,12 +88,15 @@ function modificarCategoriaFunction(categoryId) {
 					<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 						<tr class="row" id="item_${i.index}">
 							<td class="col-*-*"><a
+								id="nombreCategoria_link_id${entry.id}"
 								href="listarTareas?category=${entry.id}" id="cat_${entry.id}">${entry.name}</a></td>
 
 							<td class="col-*-*"><a
+								id="modificarCategoria_link_id${entry.name}"
 								onclick="modificarCategoriaFunction(${entry.id})" href="#"><span
 									class="glyphicon glyphicon-pencil"></span></a></td>
 							<td class="col-*-*"><a
+								id="deleteCategoria_link_id${entry.name}"
 								href="eliminarCategoria?id=${entry.id}=${entry.name}"
 								onClick="return confirm('Si elimina la categoría[${entry.id}] se borrarán todas sus tareas');"><span
 									class="glyphicon glyphicon-trash"></span></a></td>
@@ -103,9 +106,11 @@ function modificarCategoriaFunction(categoryId) {
 				<form action="nuevaCategoria" method="POST">
 					<table class="table table-bordered table-condensed">
 						<tr class="row" id="item_Week">
-							<td class="col-*-*" id="nuevaCategoria"><input type="text"
-								name="nuevaCategoria" placeholder="Categoría"></td>
-							<td colspan="2"><input type="submit" value="Crear"></td>
+							<td class="col-*-*"><input id="nuevaCategoria_text_id"
+								type="text" name="nuevaCategoria_text_id"
+								placeholder="Categoría"></td>
+							<td colspan="2"><input id="nuevaCategoria_button_id"
+								name="nuevaCategoria_button_id" type="submit" value="Crear"></td>
 						</tr>
 					</table>
 				</form>

@@ -82,38 +82,43 @@ public class ListarTareasAction implements Accion {
 		// Declaramos las variables de las listas que vamos a usar
 		// posteriormente
 		List<Task> listaTareas;
-		List<Category> listaCategorias;
+		List<Category> listaCategorias = null;
 
 		try {
+
+			// Obtenemos el listado de Categorias del usuario
+			listaCategorias = Services.getTaskService().findCategoriesByUserId(
+					usuario.getId());
+
 			// Si es la primera vez que entra, no hay categoría, así que muestra
 			// todas las tareas
 			if (category == null)
 				listaTareas = Services.getTaskService().findAllTasksByUserId(
 						usuario.getId());
-			else {
 
+			else {
 				// Si tiene categorias, probamos con las 3 predefinidas
 				if (category.equals("inbox")) {
 					listaTareas = Services.getTaskService()
 							.findInboxTasksByUserId(usuario.getId());
 
 					// Ordenamos la lista
-					ordenarTareas(listaTareas, "planned");
+					ordenarTareas(listaTareas, "planned", listaCategorias);
 
 				} else if (category.equals("today")) {
 					listaTareas = Services.getTaskService()
 							.findTodayTasksByUserId(usuario.getId());
 
 					// Ordenamos la lista
-					ordenarTareas(listaTareas, "today");
+					ordenarTareas(listaTareas, "today", listaCategorias);
 
 				} else if (category.equals("week")) {
 					listaTareas = Services.getTaskService()
 							.findWeekTasksByUserId(usuario.getId());
 
 					// Ordenamos la lista
-					ordenarTareas(listaTareas, "planned");
-					ordenarTareas(listaTareas, "week");
+					ordenarTareas(listaTareas, "planned", listaCategorias);
+					ordenarTareas(listaTareas, "week", listaCategorias);
 				}
 
 				// Si no es ninguna predefinida, intentamos convertir a Long
@@ -170,8 +175,6 @@ public class ListarTareasAction implements Accion {
 					new Date(System.currentTimeMillis()));
 			request.getSession().setAttribute("categoria", category);
 
-			listaCategorias = Services.getTaskService().findCategoriesByUserId(
-					usuario.getId());
 			request.setAttribute("listaCategorias", listaCategorias);
 
 			// Creamos los mensajes de Log
@@ -200,10 +203,12 @@ public class ListarTareasAction implements Accion {
 	 *            - Lista a ordenar
 	 * @param comparador
 	 *            - Comparador (Equivalente a la categoría) para ordenar
+	 * @param cat
+	 *            - Lista de categorias
 	 * @throws BusinessException
 	 */
-	private void ordenarTareas(List<Task> lista, String comparador)
-			throws BusinessException {
+	private void ordenarTareas(List<Task> lista, String comparador,
+			final List<Category> catL) throws BusinessException {
 
 		switch (comparador) {
 
@@ -230,7 +235,7 @@ public class ListarTareasAction implements Accion {
 			});
 			break;
 
-		// Ordenamos por fecha planeada, y si son iguales, por título
+		// Ordenamos por fecha planeada, y si son iguales, por categoría
 		case "week":
 			Collections.sort(lista, new Comparator<Task>() {
 				@Override
@@ -240,9 +245,18 @@ public class ListarTareasAction implements Accion {
 					if (o2.getPlanned() == null)
 						return 1;
 
-					if (o1.getPlanned().compareTo(o2.getPlanned()) == 0)
-						return o1.getTitle().compareTo(o2.getTitle());
-					else
+					if (o1.getPlanned().compareTo(o2.getPlanned()) == 0) {
+						String cat1 = "";
+						String cat2 = "";
+						for (Category c : catL) {
+							if (c.getId() == o1.getCategoryId())
+								cat1 = c.getName();
+							if (c.getId() == o2.getCategoryId())
+								cat2 = c.getName();
+						}
+						return cat1.compareTo(cat2);
+
+					} else
 						return o1.getPlanned().compareTo(o2.getPlanned());
 				}
 			});

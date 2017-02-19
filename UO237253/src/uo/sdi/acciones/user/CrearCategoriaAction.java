@@ -22,7 +22,7 @@ public class CrearCategoriaAction implements Accion {
 		String resultado = "EXITO";
 
 		// Se obtiene el nombre de la categoría
-		String nombre = request.getParameter("nuevaCategoria");
+		String nombre = request.getParameter("nuevaCategoria_text_id");
 		HttpSession sesion = request.getSession();
 
 		// Se define una categoría para su uso posterior
