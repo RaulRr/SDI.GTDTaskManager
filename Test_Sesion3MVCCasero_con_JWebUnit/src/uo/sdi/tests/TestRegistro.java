@@ -39,10 +39,10 @@ public class TestRegistro {
 		john.setTextField("pass", "john123456");
 		john.setTextField("rePass", "john123456");
 		john.clickButton("registrar_button_id");
-
-		john.assertTitleEquals("TaskManager - Inicie sesión"); // Volvimos a la
-																// ventana de
-																// login
+		
+		// Volvimos a la ventana delogin
+		john.assertTitleEquals("TaskManager - Inicie sesión"); 
+		john.assertTextPresent("Exito");
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class TestRegistro {
 		mary.setTextField("rePass", "john123456");
 		mary.clickButton("registrar_button_id");
 
-		mary.assertTitleEquals("TaskManager - Registro de Usuario"); // Seguimos en el
+		mary.assertTitleEquals("TaskManager - Inicie sesión"); // Seguimos en el
 																// registro
 		mary.assertTextPresent("Error");
 	}
