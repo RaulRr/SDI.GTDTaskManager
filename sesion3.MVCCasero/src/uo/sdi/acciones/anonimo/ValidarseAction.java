@@ -81,7 +81,7 @@ public class ValidarseAction implements Accion {
 					session.setAttribute("fechaInicioSesion",
 							new java.util.Date());
 					request.getServletContext().setAttribute(
-							userByLogin.getLogin(), "conectado");
+							userByLogin.getLogin(), userByLogin.getLogin());
 					Log.info("El usuario [%s] ha iniciado sesión",
 							nombreUsuario);
 				}

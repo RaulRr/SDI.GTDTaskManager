@@ -12,41 +12,53 @@ import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.User;
 import uo.sdi.dto.util.Cloner;
 
-
 public class ModificarDatosAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		
-		String resultado="EXITO";
-		
-		String nuevoEmail=request.getParameter("email");
-		HttpSession session=request.getSession();
-		User user=((User)session.getAttribute("user"));
-		User userClone=Cloner.clone(user);
+
+		// Inicializamos el resultado
+		String resultado = "EXITO";
+
+		// Obtenemos los parametros de la request
+		String nuevoEmail = request.getParameter("email");
+		HttpSession session = request.getSession();
+		User user = ((User) session.getAttribute("user"));
+
+		// Clonamos el usuario para su tratamiento
+		User userClone = Cloner.clone(user);
 		userClone.setEmail(nuevoEmail);
+
 		try {
+
+			// Intentamos actualizar el usuario en BBDD
 			UserService userService = Services.getUserService();
 			userService.updateUserDetails(userClone);
-			Log.debug("Modificado email de [%s] con el valor [%s]", 
+
+			// Si todo correcto, generamos los mensajes de Log y UI, y cambiamos
+			// el usuario de la sesión
+			Log.debug("Modificado email de [%s] con el valor [%s]",
 					userClone.getLogin(), nuevoEmail);
-			session.setAttribute("user",userClone);
 			request.setAttribute("mensajeVerde", "Se ha modificado "
 					+ "correctamente el nuevo correo");
-		}
-		catch (BusinessException b) {
+			session.setAttribute("user", userClone);
+
+		} catch (BusinessException b) {
+
+			// En caso de error, generamos el mensaje de Log y cambiamos el
+			// resultado a FRACASO
 			Log.debug("Algo ha ocurrido actualizando el email de [%s] a [%s]: "
-					+ "%s", 
-					user.getLogin(),nuevoEmail,b.getMessage());
-			resultado="FRACASO";
+					+ "%s", user.getLogin(), nuevoEmail, b.getMessage());
+			resultado = "FRACASO";
 		}
+		
 		return resultado;
 	}
-	
+
 	@Override
 	public String toString() {
 		return getClass().getName();
 	}
-	
+
 }

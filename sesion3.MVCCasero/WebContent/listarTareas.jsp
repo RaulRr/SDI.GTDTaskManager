@@ -23,13 +23,13 @@ function modificarCategoriaFunction(categoryId) {
     }
 }
 </script>
-		<%@ include file="pieDePagina.jsp"%>
+	<%@ include file="pieDePagina.jsp"%>
 	<div class="container">
 		<h3 align="center">Tareas: ${categoria}</h3>
 		<div class="container">
 			<form action="añadirTarea" method="POST">
 				<table class="table table-bordered table-condensed"
-					style="width: 70%" >
+					style="width: 70%">
 					<tr>
 						<th>Nueva Tarea:</th>
 						<td id="nuevaTarea"><input type="text" name="nuevaTarea"
@@ -143,7 +143,7 @@ function modificarCategoriaFunction(categoryId) {
 										</c:forEach>
 									</div></td>
 							</c:if>
-							<c:if test="${!categoria.equals('week')}">
+							<c:if test="${entry.planned >= date || !categoria.equals('week')}">
 								<td class="col-*-*"><c:forEach var="cat"
 										items="${listaCategorias}">
 										<c:if test="${cat.id == entry.categoryId }">
@@ -166,14 +166,14 @@ function modificarCategoriaFunction(categoryId) {
 								</c:if></td>
 						</tr>
 						<c:if
-							test="${categoria.equals('today') && i.index < listaTareas.size() && !entry.categoryId.equals(listaTareas[i.index+1].categoryId) && entry.categoryId != null}">
+							test="${categoria.equals('today') && i.index < listaTareas.size() && !entry.categoryId.equals(listaTareas[i.index+1].categoryId) && listaTareas[i.index+1].categoryId != null}">
 							<tr>
 								<th colspan="7" class="alert alert-info" style="height: 50px">
 								</th>
 							</tr>
 						</c:if>
 						<c:if
-							test="${categoria.equals('week') && i.index < listaTareas.size() && !entry.planned.getDate().equals(listaTareas[i.index+1].planned.getDate())}">
+							test="${categoria.equals('week') && i.index < listaTareas.size()-1 && !entry.planned.getDate().equals(listaTareas[i.index+1].planned.getDate())}">
 							<tr>
 								<th colspan="7" class="alert alert-info" style="height: 50px">
 								</th>
@@ -183,8 +183,9 @@ function modificarCategoriaFunction(categoryId) {
 				</table>
 			</div>
 		</div>
-			<a id="paginaAnterior_link_id" href="principalUsuario">
-			<span class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás</a>
+		<a id="paginaAnterior_link_id" href="principalUsuario"> <span
+			class="glyphicon glyphicon-circle-arrow-left"></span> Volver atrás
+		</a>
 	</div>
 </body>
 </html>

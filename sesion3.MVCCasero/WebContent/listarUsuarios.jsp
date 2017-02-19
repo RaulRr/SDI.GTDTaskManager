@@ -21,9 +21,9 @@
 				align="center">
 				<tr class="row">
 					<th class="col-*-*">ID</th>
-					<th class="col-*-*"><a href="ordenarUsuarios?value=login">LOGIN</a></th>
-					<th class="col-*-*"><a href="ordenarUsuarios?value=email">EMAIL</a></th>
-					<th class="col-*-*"><a href="ordenarUsuarios?value=status">STATUS</a></th>
+					<th class="col-*-*"><a id="login_link_id" href="ordenarUsuarios?value=login">LOGIN</a></th>
+					<th class="col-*-*"><a id="email_link_id" href="ordenarUsuarios?value=email">EMAIL</a></th>
+					<th class="col-*-*"><a id="status_link_id" href="ordenarUsuarios?value=status">STATUS</a></th>
 				</tr>
 				<c:forEach var="entry" items="${listaUsuarios}" varStatus="i">
 					<tr class="row" id="item_${i.index}">
@@ -37,14 +37,14 @@
 						</c:if>
 						<c:if test="${entry.isAdmin==false}">
 							<c:if test="${entry.status == 'ENABLED'}">
-								<td class="alert alert-success"><a
+								<td class="alert alert-success"><a id="status_link_id${entry.id}"
 									href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
 							</c:if>
 							<c:if test="${entry.status != 'ENABLED'}">
-								<td class="alert alert-danger"><a
+								<td class="alert alert-danger"><a id="status_link_id${entry.id}"
 									href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
 							</c:if>
-							<td class="col*-*"><a
+							<td class="col*-*"><a id="delete_link_id${entry.id}"
 								href="eliminarUsuario?id=${entry.id}=${entry.login}"
 								onClick="return confirm('¿Eliminar al usuario: ${entry.id} - ${entry.login}?');">Delete</a></td>
 						</c:if>

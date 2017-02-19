@@ -34,13 +34,12 @@ import uo.sdi.persistence.PersistenceException;
 public class Controlador extends javax.servlet.http.HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private Map<String, Map<String, Accion>> mapaDeAcciones; // <rol, <opcion,
-																// objeto
-																// Accion>>
-	private Map<String, Map<String, Map<String, String>>> mapaDeNavegacion; // <rol,
-																			// <opcion,
-																			// <resultado,
-																			// JSP>>>
+
+	// <rol, <opcion, objetoAccion>>
+	private Map<String, Map<String, Accion>> mapaDeAcciones;
+
+	// <rol, <opcion, <resultado, JSP>>>
+	private Map<String, Map<String, Map<String, String>>> mapaDeNavegacion;
 
 	public void init() throws ServletException {
 		crearMapaAcciones();
@@ -55,18 +54,9 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		String rolAntes, rolDespues;
 
 		try {
-			accionNavegadorUsuario = request.getServletPath().replace("/", ""); // Obtener
-																				// el
-																				// string
-																				// que
-																				// hay
-																				// a
-																				// la
-																				// derecha
-																				// de
-																				// la
-																				// última
-																				// /
+
+			// Obtener el string que hay a la derecha de la última /
+			accionNavegadorUsuario = request.getServletPath().replace("/", "");
 
 			rolAntes = obtenerRolDeSesion(request);
 
@@ -128,7 +118,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			String opcion) {
 
 		Accion accion = mapaDeAcciones.get(rol).get(opcion);
-		if (accion == null) // Arreglo para enviar a página por defecto si se
+		if (accion == null) // Arreglo para enviar a la página por defecto si se
 							// salta el mapa
 			accion = mapaDeAcciones.get(rol).get("error");
 		Log.debug("Elegida acción [%s] para opción [%s] y rol [%s]", accion,
@@ -143,8 +133,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			String resultado) {
 		Map<String, String> jspSiguienteM = mapaDeNavegacion.get(rol).get(
 				opcion);
-		if (jspSiguienteM == null) { // Arreglo para enviar a página por defecto
-										// si se salta el mapa
+		if (jspSiguienteM == null) { // Arreglo para enviar a la página por
+										// defecto si se salta el mapa
 			jspSiguienteM = mapaDeNavegacion.get(rol).get("error");
 		}
 		String jspSiguiente = jspSiguienteM.get(resultado);
@@ -246,6 +236,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/login.jsp");
+		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("cerrarSesion", resultadoYJSP);
 
 		resultadoYJSP = new HashMap<String, String>();
@@ -332,7 +323,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/login.jsp");
-		resultadoYJSP.put("FRACASO", "/login.jsp");
+		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("cerrarSesion", resultadoYJSP);
 
 		resultadoYJSP = new HashMap<String, String>();
