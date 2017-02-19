@@ -53,7 +53,7 @@ GRANT DBA TO SA
 SET SCHEMA PUBLIC
 INSERT INTO TUSERS VALUES(1,'usuario1@gmail.com',FALSE,'usuario1','usuario1','ENABLED')
 INSERT INTO TUSERS VALUES(2,'usuario2@gmail.com',FALSE,'usuario2','usuario2','ENABLED')
-INSERT INTO TUSERS VALUES(3,'usuario3@gmail.com',FALSE,'usuario3','usuario3','DISABLED')
+INSERT INTO TUSERS VALUES(3,'usuario3@gmail.com',FALSE,'usuario3','usuario3','ENABLED')
 INSERT INTO TUSERS VALUES(4,'me@system.gtd',TRUE,'administrador1','administrador1','ENABLED')
 INSERT INTO TTASKS VALUES(71,'Esto es un comentario!','2017-02-18',NULL,'2017-01-01','tareaAtrasada1',NULL,1)
 INSERT INTO TTASKS VALUES(72,'','2017-02-18',NULL,'2017-06-30','tareaJunio1',NULL,1)
