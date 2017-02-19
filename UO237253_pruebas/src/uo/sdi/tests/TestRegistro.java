@@ -17,36 +17,39 @@ public class TestRegistro {
 		mary.setBaseUrl("http://localhost:8280/UO237253");
 	}
 
+	/**
+	 * Registrar un usuario satisfactoriamente
+	 */
 	@Test
 	public void testRegistrarUsuario() {
 		john.beginAt("/"); // Navegar a la URL
-		john.assertLinkPresent("registrar_link_id"); // Comprobar que existe el
-														// hipervínculo
+		john.assertLinkPresent("registrar_link_id"); // Comprobar que existe
 		john.clickLink("registrar_link_id"); // Seguir el hipervínculo
-
-		john.assertTitleEquals("TaskManager - Registro de Usuario");// Comprobar
-																	// título
-																	// de la
-																	// página
+		
+		// Comprobar título de la página
+		john.assertTitleEquals("TaskManager - Registro de Usuario");
 		john.assertTextPresent("Login:"); // Comprobar Login en la pagina
 		john.assertTextPresent("Email:"); // Comprobar Email en la pagina
 		john.assertTextPresent("Contraseña:"); // Comprobar Contraseña en la
-												// pagina
+												
 		john.assertTextPresent("Repetir Contraseña:");
 
-		john.setTextField("login", "john");
-		john.setTextField("email", "john@gmail.com");
+		john.setTextField("login", "john"); //Rellenamos los campos
+		john.setTextField("email", "john@gmail.com");//del formulario
 		john.setTextField("pass", "john123456");
 		john.setTextField("rePass", "john123456");
-		john.clickButton("registrar_button_id");
-		
-		// Volvimos a la ventana delogin
-		john.assertTitleEquals("TaskManager - Inicie sesión"); 
+		john.clickButton("registrar_button_id");//Pulsamos
+
+		// Volvimos a la ventana de login
+		john.assertTitleEquals("TaskManager - Inicie sesión");
 		john.assertTextPresent("Usuario registrado correctamente");
 	}
-
+	
+	/**
+	 * No hay login
+	 */
 	@Test
-	public void testRegistrarUsuarioFailLogin() {
+	public void testRegistrarUsuarioNullLogin() {
 		mary.beginAt("/"); // Navegar a la URL
 		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
 
@@ -56,11 +59,33 @@ public class TestRegistro {
 		mary.setTextField("rePass", "john123456");
 		mary.clickButton("registrar_button_id");
 
+		//Seguimos en el registro
 		mary.assertTitleEquals("TaskManager - Registro de Usuario");
-		
+		mary.assertTextPresent("Error");
+	}
+	
+	/**
+	 * Ya existe un usario con el login "usuario3"
+	 */
+	@Test
+	public void testRegistrarUsuarioExistingLogin() {
+		mary.beginAt("/"); // Navegar a la URL
+		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
+
+		mary.setTextField("login", "usuario3");
+		mary.setTextField("email", "john@gmail.com");
+		mary.setTextField("pass", "john123456");
+		mary.setTextField("rePass", "john123456");
+		mary.clickButton("registrar_button_id");
+
+		//Seguimos en el registro
+		mary.assertTitleEquals("TaskManager - Registro de Usuario");
 		mary.assertTextPresent("Error");
 	}
 
+	/**
+	 * Comprobamos error con email no válido
+	 */
 	@Test
 	public void testRegistrarUsuarioFailEmail() {
 		mary.beginAt("/"); // Navegar a la URL
@@ -71,15 +96,17 @@ public class TestRegistro {
 		mary.setTextField("pass", "john123456");
 		mary.setTextField("rePass", "john123456");
 		mary.clickButton("registrar_button_id");
-
-		mary.assertTitleEquals("TaskManager - Registro de Usuario"); // Seguimos
-																		// en el
-																	// registro
-		mary.assertTextPresent("Error");
+		
+		//Seguimos en el registro
+		mary.assertTitleEquals("TaskManager - Registro de Usuario"); 
+		mary.assertTextPresent("Error"); //Aparece un mensaje de error
 	}
-
+	
+	/**
+	 * Comprobamos error con passwords distintas
+	 */
 	@Test
-	public void testRegistrarUsuarioFailPassword() {
+	public void testRegistrarUsuarioDifferentPasswords() {
 		mary.beginAt("/"); // Navegar a la URL
 		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
 
@@ -89,9 +116,27 @@ public class TestRegistro {
 		mary.setTextField("rePass", "john123");
 		mary.clickButton("registrar_button_id");
 
-		mary.assertTitleEquals("TaskManager - Registro de Usuario"); // Seguimos
-																		// en el
-																	// registro
+		//Seguimos en el registro
+		mary.assertTitleEquals("TaskManager - Registro de Usuario"); // registro
+		mary.assertTextPresent("Error");
+	}
+	
+	/**
+	 * Comprobamos error con password no valida
+	 */
+	@Test
+	public void testRegistrarUsuarioInvalidPasswords() {
+		mary.beginAt("/"); // Navegar a la URL
+		mary.clickLink("registrar_link_id"); // Seguir el hipervínculo
+
+		mary.setTextField("login", "mary");
+		mary.setTextField("email", "mary@gmail.com");
+		mary.setTextField("pass", "john");
+		mary.setTextField("rePass", "john");
+		mary.clickButton("registrar_button_id");
+
+		//Seguimos en el registro
+		mary.assertTitleEquals("TaskManager - Registro de Usuario"); // registro
 		mary.assertTextPresent("Error");
 	}
 }

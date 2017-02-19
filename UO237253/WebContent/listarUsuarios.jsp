@@ -42,12 +42,12 @@
 							<c:if test="${entry.status == 'ENABLED'}">
 								<td class="alert alert-success"><a
 									id="status_link_id${entry.id}"
-									href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
+									href="modificarStatus?id=${entry.id}=${entry.login}=${entry.status}">${entry.status}</a></td>
 							</c:if>
 							<c:if test="${entry.status != 'ENABLED'}">
 								<td class="alert alert-danger"><a
 									id="status_link_id${entry.id}"
-									href="modificarStatus?id=${entry.id}=${entry.login}">${entry.status}</a></td>
+									href="modificarStatus?id=${entry.id}=${entry.login}=${entry.status}">${entry.status}</a></td>
 							</c:if>
 							<td class="col*-*"><a id="delete_link_id${entry.id}"
 								href="eliminarUsuario?id=${entry.id}=${entry.login}"

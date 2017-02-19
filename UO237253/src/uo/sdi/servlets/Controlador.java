@@ -78,11 +78,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 			request.getSession().invalidate();
 
-			Log.error(
-					"Se ha producido alguna excepción relacionada con la persistencia [%s]",
-					e.getMessage());
+			Log.error("Se ha producido alguna excepción relacionada con la "
+					+ "persistencia [%s]", e.getMessage());
 			request.setAttribute("mensajeParaElUsuario",
-					"Error irrecuperable: contacte con el responsable de la aplicación");
+					"Error irrecuperable: "
+							+ "contacte con el responsable de la aplicación");
 			jspSiguiente = "/login.jsp";
 
 		} catch (Exception e) {
@@ -92,7 +92,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			Log.error("Se ha producido alguna excepción no manejada [%s]",
 					e.getMessage());
 			request.setAttribute("mensajeParaElUsuario",
-					"Error irrecuperable: contacte con el responsable de la aplicación");
+					"Error irrecuperable: contacte con el responsable de la "
+							+ "aplicación");
 			jspSiguiente = "/login.jsp";
 		}
 
@@ -118,11 +119,13 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			String opcion) {
 
 		Accion accion = mapaDeAcciones.get(rol).get(opcion);
-		if (accion == null) // Arreglo para enviar a la página por defecto si se
-							// salta el mapa
+		// Arreglo para enviar a la página por defecto si se salta el mapa
+		if (accion == null)
 			accion = mapaDeAcciones.get(rol).get("error");
+
 		Log.debug("Elegida acción [%s] para opción [%s] y rol [%s]", accion,
 				opcion, rol);
+
 		return accion;
 	}
 
@@ -137,10 +140,12 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 										// defecto si se salta el mapa
 			jspSiguienteM = mapaDeNavegacion.get(rol).get("error");
 		}
+
 		String jspSiguiente = jspSiguienteM.get(resultado);
-		Log.debug(
-				"Elegida página siguiente [%s] para el resultado [%s] tras realizar [%s] con rol [%s]",
-				jspSiguiente, resultado, opcion, rol);
+		Log.debug("Elegida página siguiente [%s] para el resultado [%s] tras "
+				+ "realizar [%s] con rol [%s]", jspSiguiente, resultado,
+				opcion, rol);
+
 		return jspSiguiente;
 	}
 
@@ -188,13 +193,15 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 	private void crearMapaDeNavegacion() {
 
-		mapaDeNavegacion = new HashMap<String, Map<String, Map<String, String>>>();
+		mapaDeNavegacion = 
+				new HashMap<String, Map<String, Map<String, String>>>();
 
 		// Crear mapas auxiliares vacíos
-		Map<String, Map<String, String>> opcionResultadoYJSP = new HashMap<String, Map<String, String>>();
+		Map<String, Map<String, String>> opcionResultadoYJSP = 
+				new HashMap<String, Map<String, String>>();
 		Map<String, String> resultadoYJSP = new HashMap<String, String>();
 
-		// Mapa de navegación de anónimo
+		// Mapa de navegación de ANONIMO
 		resultadoYJSP.put("FRACASO", "/login.jsp");
 		opcionResultadoYJSP.put("validarse", resultadoYJSP);
 
@@ -224,7 +231,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResultadoYJSP = new HashMap<String, Map<String, String>>();
 		resultadoYJSP = new HashMap<String, String>();
 
-		// Mapa de navegación de usuarios normales
+		// Mapa de navegación de USUARIOS normales
 		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
 		resultadoYJSP.put("FRACASO", "/login.jsp");
 		opcionResultadoYJSP.put("validarse", resultadoYJSP);
@@ -238,6 +245,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/login.jsp");
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("cerrarSesion", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
+		resultadoYJSP.put("FRACASO", "/login.jsp");
+		opcionResultadoYJSP.put("principalUsuario", resultadoYJSP);
 
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarTareas.jsp");
@@ -249,21 +261,17 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("FRACASO", "/listarTareas.jsp");
 		opcionResultadoYJSP.put("añadirTarea", resultadoYJSP);
 
-		// Editar una tarea
+		// Entrar al editor de tarea
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/editarTarea.jsp");
 		resultadoYJSP.put("FRACASO", "/listarTareas.jsp");
 		opcionResultadoYJSP.put("editarTarea", resultadoYJSP);
-
+		
+		//Aqui ya editamos la tarea
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarTareas?category=editada");
 		resultadoYJSP.put("FRACASO", "/editarTarea");
 		opcionResultadoYJSP.put("modificarTarea", resultadoYJSP);
-
-		resultadoYJSP = new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
-		resultadoYJSP.put("FRACASO", "/login.jsp");
-		opcionResultadoYJSP.put("principalUsuario", resultadoYJSP);
 
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarTareas");
@@ -296,7 +304,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResultadoYJSP = new HashMap<String, Map<String, String>>();
 		resultadoYJSP = new HashMap<String, String>();
 
-		// Mapa de navegación del administrador
+		// Mapa de navegación del ADMINISTRADOR
 		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
 		resultadoYJSP.put("FRACASO", "/login.jsp");
 		opcionResultadoYJSP.put("validarse", resultadoYJSP);
@@ -316,7 +324,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp");
 		opcionResultadoYJSP.put("ordenarUsuarios", resultadoYJSP);
 
-		resultadoYJSP = new HashMap<String, String>();// eliminar un usuario
+		resultadoYJSP = new HashMap<String, String>();// Eliminar un usuario
 		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
 		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp");
 		opcionResultadoYJSP.put("eliminarUsuario", resultadoYJSP);
