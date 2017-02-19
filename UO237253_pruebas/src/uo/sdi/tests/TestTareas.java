@@ -74,4 +74,36 @@ public class TestTareas {
 		task.assertLinkNotPresent("finish_link_idTareaTest");
 	}
 	
+	/**
+	 * Probamos a editar una tarea con su titulo
+	 */
+	@Test
+	public void testTaskEditor() {
+		
+		//Estamos en principal_usuario
+		task.assertTitleEquals("TaskManager - Página principal del usuario");
+		task.clickLink("listarTareas_link_id");//Accedemos
+		
+		task.setTextField("nuevaTarea","TareaTest");//creamos
+		task.clickButton("nuevaTarea_button_id");
+		task.clickLink("editarTareaTareaTest");//Accedemos al editor
+		
+		task.assertTitleEquals("TaskManager - Editor Tarea");
+		task.assertTextPresent("Title");
+		task.assertTextPresent("Comments");
+		task.assertTextPresent("New Planned Date:");
+		task.assertTextPresent("Categories");
+		task.assertLinkPresent("paginaAnterior_link_id");
+		task.assertTextPresent("TareaTest");//Presente el nombre de la tarea
+		task.assertButtonPresent("editar_button_id");
+		task.setTextField("title","TareaModificada");
+		task.clickButton("editar_button_id");//Editamos y volvemos a la lista
+		
+		task.assertTitleEquals("TaskManager - Listado de tareas");
+		task.assertLinkPresent("editarTareaTareaModificada");//Con nuevo titulo
+		task.assertLinkPresent("finish_link_idTareaModificada");
+		task.clickLink("finish_link_idTareaModificada");
+		task.assertTextPresent("Tarea finalizada ");
+	}
+	
 }

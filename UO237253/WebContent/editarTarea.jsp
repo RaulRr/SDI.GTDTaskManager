@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>TaskManager - Registro de Usuario</title>
+<title>TaskManager - Editor Tarea</title>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -16,7 +16,7 @@
 			<table class="table table-striped table-condensed" style="width: 70%">
 				<tr>
 					<th>Title:</th>
-					<td id="title"><input type="text"
+					<td id="title"><input type="text" name="title"
 						style="width: 100%; height: 30px;" name="title" value="${titulo}"></td>
 				</tr>
 				<tr>
@@ -46,7 +46,7 @@
 				</tr>
 				<tr>
 					<td />
-					<td align="center"><input type="submit" value="Editar Tarea"></td>
+					<td align="center"><input id="editar_button_id" type="submit" value="Editar Tarea"></td>
 				</tr>
 			</table>
 		</form>
