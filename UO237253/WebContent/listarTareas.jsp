@@ -32,9 +32,9 @@ function modificarCategoriaFunction(categoryId) {
 					style="width: 70%">
 					<tr>
 						<th>Nueva Tarea:</th>
-						<td id="nuevaTarea"><input type="text" name="nuevaTarea"
+						<td id="nuevaTarea"><input id="nuevaTarea_text_id" type="text" name="nuevaTarea"
 							placeholder="nombre" style="width: 95%"></td>
-						<td><input type="submit" value="NuevaTarea"
+						<td><input id="nuevaTarea_button_id" type="submit" value="NuevaTarea"
 							style="width: 100%"></td>
 						<c:if
 							test="${filtro.equals('no') && !categoria.equals('inbox') && !categoria.equals('week') 
@@ -167,7 +167,7 @@ function modificarCategoriaFunction(categoryId) {
 								<td class="col-*-*">${entry.planned}</td>
 							</c:if>
 							<td class="col-*-*"><c:if test="${entry.finished == null}">
-									<a href="cerrarTarea?=${entry.id}"><span
+									<a id = "finish_link_id${entry.title}" href="cerrarTarea?=${entry.id}"><span
 										class="glyphicon glyphicon-ok"></span> Finish</a>
 								</c:if></td>
 						</tr>

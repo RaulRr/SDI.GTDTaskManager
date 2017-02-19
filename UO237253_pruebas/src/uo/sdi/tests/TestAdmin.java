@@ -102,7 +102,7 @@ public class TestAdmin {
 		admin.clickButton("validar_button_id"); // Seguir el hipervínculo
 		admin.clickLink("listarUsuarios_link_id"); //Accedemos a la lista
 		
-		admin.assertLinkPresent("delete_link_id1");//Usuario1 o primero
+		admin.assertLinkPresent("delete_link_id1");//Link borrar al usuario1
 		admin.assertLinkPresentWithExactText("Delete");
 		
 		admin.clickLink("paginaAnterior_link_id");//Volvemos

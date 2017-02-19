@@ -58,7 +58,8 @@ public class AñadirTareaAction implements Accion {
 			// Se crea el mensae de Log y UI
 			Log.debug("El usuario [%s] ha creado una nueva tarea [%s]",
 					user.getLogin(), nombre);
-			request.setAttribute("mensajeVerde", "Tarea añadida correctamente.");
+			request.setAttribute("mensajeVerde", 
+					"Tarea añadida correctamente.");
 
 		} catch (BusinessException b) {
 

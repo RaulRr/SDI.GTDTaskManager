@@ -258,7 +258,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarTareas?category=añadida");
-		resultadoYJSP.put("FRACASO", "/listarTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/listarTareas");
 		opcionResultadoYJSP.put("añadirTarea", resultadoYJSP);
 
 		// Entrar al editor de tarea
@@ -326,7 +326,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 		resultadoYJSP = new HashMap<String, String>();// Eliminar un usuario
 		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
-		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp");
+		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("eliminarUsuario", resultadoYJSP);
 
 		resultadoYJSP = new HashMap<String, String>();

@@ -61,7 +61,8 @@ public class ValidarseAction implements Accion {
 					// UI,
 					// y se cambia el resutlado a FRACASO
 					session.invalidate();
-					Log.info("El usuario [%s] ya está conectado", nombreUsuario);
+					Log.info("El usuario [%s] ya está conectado", 
+							nombreUsuario);
 					request.setAttribute("mensajeParaElUsuario", "El usuario ["
 							+ nombreUsuario + "] ya está conectado");
 					resultado = "FRACASO";
@@ -102,10 +103,10 @@ public class ValidarseAction implements Accion {
 
 			// Si hay un usuario ya conectado, se avisa, generando el mensaje
 			// de Log y el de UI, y cambiando el resultado a FRACASO
-			Log.info(
-					"Se ha intentado iniciar sesión como [%s] teniendo la sesión iniciada como [%s]",
-					nombreUsuario,
+			Log.info("Se ha intentado iniciar sesión como [%s] teniendo la "
+					+ "sesión iniciada como [%s]", nombreUsuario,
 					((User) session.getAttribute("user")).getLogin());
+
 			request.setAttribute("mensajeParaElUsuario",
 					"Se ha intentado iniciar sesión como [" + nombreUsuario
 							+ "] teniendo la sesión iniciada como ["

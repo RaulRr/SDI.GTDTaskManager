@@ -25,7 +25,8 @@ public class OrdenarUsuariosAction implements Accion {
 		String resultado = "EXITO";
 
 		// Obtenemos el comparador de ordenación de la request
-		String comparador = request.getQueryString().split("&")[0].split("=")[1];
+		String comparador = 
+				request.getQueryString().split("&")[0].split("=")[1];
 
 		List<User> listaUsuarios;
 

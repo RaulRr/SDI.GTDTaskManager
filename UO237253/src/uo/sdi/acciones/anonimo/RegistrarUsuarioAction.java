@@ -42,7 +42,7 @@ public class RegistrarUsuarioAction implements Accion {
 		}
 
 		// Comprobamos que el tamaño del Login nos ea menor de 3
-		if (login.length()<3) {
+		if (login.length() < 3) {
 			request.setAttribute("mensajeParaElUsuario",
 					"Error. Login demasiado corto");
 			resultado = "FRACASO";
@@ -61,7 +61,8 @@ public class RegistrarUsuarioAction implements Accion {
 			// Al menos 8 caracteres
 			if (password.length() < 8) {
 				request.setAttribute("mensajeParaElUsuario",
-						"Error. Formato de la contraseña inválido. Debe tener al menos 8 caracteres.");
+						"Error. Formato de la contraseña inválido. Debe tener "
+								+ "al menos 8 caracteres.");
 				resultado = "FRACASO";
 				return resultado;
 				// Si cumple el tamaño, se comprueba que tengan al menos una
@@ -69,7 +70,8 @@ public class RegistrarUsuarioAction implements Accion {
 			} else if (!password.matches(".*[a-zA-Z].*")
 					|| !password.matches(".*[0-9].*")) {
 				request.setAttribute("mensajeParaElUsuario",
-						"Error. Formato de la contraseña inválido. Debe tener letras y números.");
+						"Error. Formato de la contraseña inválido. Debe tener "
+								+ "letras y números.");
 				resultado = "FRACASO";
 				return resultado;
 			}
