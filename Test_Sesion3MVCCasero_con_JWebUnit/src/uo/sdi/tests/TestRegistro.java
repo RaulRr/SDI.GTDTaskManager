@@ -42,7 +42,7 @@ public class TestRegistro {
 		
 		// Volvimos a la ventana delogin
 		john.assertTitleEquals("TaskManager - Inicie sesión"); 
-		john.assertTextPresent("Exito");
+		john.assertTextPresent("Usuario registrado correctamente");
 	}
 
 	@Test
@@ -56,8 +56,8 @@ public class TestRegistro {
 		mary.setTextField("rePass", "john123456");
 		mary.clickButton("registrar_button_id");
 
-		mary.assertTitleEquals("TaskManager - Inicie sesión"); // Seguimos en el
-																// registro
+		mary.assertTitleEquals("TaskManager - Registro de Usuario");
+		
 		mary.assertTextPresent("Error");
 	}
 
